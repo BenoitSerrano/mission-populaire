@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../user';
 import { MISSION_STATUSES, missionStatusType } from './types';
 
@@ -21,4 +21,7 @@ export class Mission {
 
     @ManyToOne(() => User, { onDelete: 'CASCADE', nullable: false })
     user: User;
+
+    @CreateDateColumn({ type: 'timestamptz' })
+    publishedAt: string;
 }
