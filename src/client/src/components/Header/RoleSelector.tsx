@@ -23,6 +23,7 @@ function RoleSelector() {
             <Menu id="menu" anchorEl={menuAnchorEl} open={!!menuAnchorEl} onClose={closeMenu}>
                 <MenuItem onClick={buildSelectRole('MILITANT')}>Militant·e</MenuItem>
                 <MenuItem onClick={buildSelectRole('CHEF_GA')}>Chef·fe de GA</MenuItem>
+                <MenuItem onClick={logout}>Se déconnecter</MenuItem>
             </Menu>
         </Container>
     );
@@ -44,6 +45,12 @@ function RoleSelector() {
                     break;
             }
         };
+    }
+
+    function logout() {
+        closeMenu();
+        localSessionHandler.logout();
+        navigate(pathHandler.getRoutePath('SIGN_IN'));
     }
 
     function closeMenu() {

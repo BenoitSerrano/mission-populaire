@@ -1,7 +1,7 @@
 import { missionsApi } from '../../lib/api/missionsApi';
 import { Query } from '../../components/Query';
 import { styled } from '@mui/material';
-import { MissionsTable } from './AdsTable';
+import { AdsTable } from './AdsTable';
 import { Button } from '../../components/Button';
 import { locale } from '../../locale';
 import { useNavigate } from 'react-router-dom';
@@ -12,9 +12,11 @@ function MyAds() {
 
     return (
         <Container>
-            <Button onClick={navigateToCreateAd}>{locale.myAds.createAd}</Button>
+            <Button variant="contained" onClick={navigateToCreateAd}>
+                {locale.myAds.createAd}
+            </Button>
             <Query apiCall={() => missionsApi.getMyMissions()} queryKey={['me', 'missions']}>
-                {(data) => <MissionsTable missions={data.missions} />}
+                {(data) => <AdsTable missions={data.missions} />}
             </Query>
         </Container>
     );

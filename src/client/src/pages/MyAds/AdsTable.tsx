@@ -3,14 +3,19 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { missionApiType, missionsApi } from '../../lib/api/missionsApi';
 import { useApiCall } from '../../lib/useApiCall';
 
+import { IconButton } from '../../components/IconButton';
+import { useNavigate } from 'react-router-dom';
+import { pathHandler } from '../../lib/pathHandler';
 import { Button } from '../../components/Button';
 
-function MissionsTable(props: { missions: missionApiType[] }) {
+function AdsTable(props: { missions: missionApiType[] }) {
     const deleteMyMissionApiCall = useApiCall({
         apiCall: missionsApi.deleteMyMission,
         successText: 'Mission supprimée',
         queryKeyToInvalidate: ['missions'],
     });
+    const navigate = useNavigate();
+
     return (
         <TableContainer>
             <Table stickyHeader>
@@ -18,7 +23,7 @@ function MissionsTable(props: { missions: missionApiType[] }) {
                     <TableRow>
                         <TableCell>Titre</TableCell>
                         <TableCell width="10%">Publié le</TableCell>
-                        <TableCell width="5%"></TableCell>
+                        <TableCell width="25%"></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -29,11 +34,23 @@ function MissionsTable(props: { missions: missionApiType[] }) {
                             <TableCell>
                                 <Button
                                     startIcon={<DeleteForeverIcon />}
-                                    isLoading={deleteMyMissionApiCall.isLoading}
-                                    onClick={() => deleteMyMissionApiCall.perform(mission.id)}
+                                    onClick={() => {}}
+                                    title="Examiner les candidatures"
                                 >
-                                    Supprimer
+                                    Examiner les candidatures
                                 </Button>
+                                <IconButton
+                                    IconComponent={DeleteForeverIcon}
+                                    onClick={() => navigateToMissionDetails(mission.id)}
+                                    title="Éditer l'annonce"
+                                />
+                                <IconButton
+                                    IconComponent={DeleteForeverIcon}
+                                    onClick={() => deleteMyMissionApiCall.perform(mission.id)}
+                                    color="error"
+                                    title="Supprimer l'annonce"
+                                    isLoading={deleteMyMissionApiCall.isLoading}
+                                />
                             </TableCell>
                         </TableRow>
                     ))}
@@ -41,5 +58,9 @@ function MissionsTable(props: { missions: missionApiType[] }) {
             </Table>
         </TableContainer>
     );
+
+    function navigateToMissionDetails(missionId: string) {
+        navigate(pathHandler.getRoutePath('MISSION_DETAILS', { missionId }));
+    }
 }
-export { MissionsTable };
+export { AdsTable };
