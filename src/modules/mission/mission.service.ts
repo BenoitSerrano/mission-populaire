@@ -46,9 +46,7 @@ function buildMissionService() {
         const mission = await missionRepository.findOneByOrFail({
             id: missionId,
         });
-        return {
-            mission,
-        };
+        return mission;
     }
 
     async function deleteMyMission(missionId: Mission['id'], user: User) {

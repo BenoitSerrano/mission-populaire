@@ -2,7 +2,7 @@ import { Home } from '../pages/Home';
 import { ROUTE_KEYS } from './routeKeys';
 import { Missions } from '../pages/Missions';
 import { SignIn } from '../pages/SignIn';
-import { MissionDetails } from '../pages/MissionDetails';
+import { MissionDetails } from '../pages/MissionDetails/MissionDetails';
 import { AdCreation } from '../pages/AdCreation';
 import { MyAds } from '../pages/MyAds';
 

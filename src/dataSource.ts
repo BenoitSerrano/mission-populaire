@@ -3,6 +3,7 @@ import { config } from './config';
 
 import { Mission } from './modules/mission';
 import { User } from './modules/user';
+import { Application } from './modules/application';
 
 const dataSource = new DataSource({
     type: 'postgres',
@@ -13,7 +14,7 @@ const dataSource = new DataSource({
     database: config.DATABASE_NAME,
     logging: ['warn', 'error'],
     connectTimeoutMS: 20000,
-    entities: [Mission, User],
+    entities: [Mission, User, Application],
     subscribers: [],
     migrations: ['**/migrations/*.js'],
 });
