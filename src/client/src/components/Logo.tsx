@@ -1,5 +1,5 @@
 function Logo() {
-    return <>Sentinel</>;
+    return <>Mission Populaire</>;
 }
 
 export { Logo };
