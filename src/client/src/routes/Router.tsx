@@ -5,7 +5,7 @@ import { ROUTE_KEYS, routeKeyType } from './routeKeys';
 import { ROUTE_PATHS } from './routePaths';
 import { TitleWrapper } from './TitleWrapper';
 import { ROUTE_TITLES } from './routeTitles';
-import { DashboardPage } from '../components/DashboardPage';
+import { AuthenticatedPage } from '../components/AuthenticatedPage';
 
 function Router() {
     return <Routes>{ROUTE_KEYS.map((routeKey) => renderElement(routeKey))}</Routes>;
@@ -25,14 +25,15 @@ function renderElement(routeKey: routeKeyType) {
                     element={<TitleWrapper documentTitle={documentTitle}>{element}</TitleWrapper>}
                 />
             );
-        case 'dashboard':
+        case 'chef':
+        case 'militant':
             return (
                 <Route
                     key={path}
                     path={path}
                     element={
                         <TitleWrapper documentTitle={documentTitle}>
-                            <DashboardPage routeKey={routeKey}>{element}</DashboardPage>
+                            <AuthenticatedPage routeKey={routeKey}>{element}</AuthenticatedPage>
                         </TitleWrapper>
                     }
                 />

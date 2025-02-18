@@ -1,4 +1,11 @@
-const ROUTE_KEYS = ['HOME', 'MISSIONS', 'MISSION_CREATION', 'MISSION_DETAILS', 'SIGN_IN'] as const;
+const ROUTE_KEYS = [
+    'HOME',
+    'MISSIONS',
+    'MY_ADS',
+    'AD_CREATION',
+    'MISSION_DETAILS',
+    'SIGN_IN',
+] as const;
 
 type routeKeyType = (typeof ROUTE_KEYS)[number];
 

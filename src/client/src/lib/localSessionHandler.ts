@@ -7,6 +7,7 @@ const localSessionHandler = {
     getToken,
     getIsAuthenticated,
     setUserInfo,
+    getUserInfo,
 };
 
 function setToken(token: string) {
@@ -15,6 +16,9 @@ function setToken(token: string) {
 
 function setUserInfo(userInfo: userInfoType) {
     localStorage.userInfoHandler.set(userInfo);
+}
+function getUserInfo() {
+    return localStorage.userInfoHandler.get();
 }
 
 function getToken() {

@@ -12,6 +12,12 @@ const missionRoutes: Array<routeType<any, any, any>> = [
         controller: missionController.getMissions,
     },
     {
+        method: 'GET',
+        path: '/me/missions',
+        kind: 'authenticated',
+        controller: missionController.getMyMissions,
+    },
+    {
         method: 'POST',
         path: '/me/missions',
         kind: 'authenticated',

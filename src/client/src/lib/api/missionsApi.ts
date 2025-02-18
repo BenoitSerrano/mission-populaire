@@ -2,6 +2,7 @@ import { performApiCall } from './utils';
 
 const missionsApi = {
     getMissions,
+    getMyMissions,
     getMissionDetails,
     createMission,
     deleteMyMission,
@@ -16,6 +17,11 @@ type missionApiType = { id: string; title: string; description: string; publishe
 
 async function getMissions(params: {}) {
     const URI = `missions`;
+    return performApiCall<{ total: number; missions: missionApiType[] }>(URI, 'GET', undefined, {});
+}
+
+async function getMyMissions() {
+    const URI = `me/missions`;
     return performApiCall<{ total: number; missions: missionApiType[] }>(URI, 'GET', undefined, {});
 }
 

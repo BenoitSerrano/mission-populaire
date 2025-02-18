@@ -9,6 +9,7 @@ function buildMissionService() {
     const missionRepository = dataSource.getRepository(Mission);
     const missionService = {
         getMissions,
+        getMissionsByUser,
         getMissionDetails,
         createMission,
         deleteMyMission,
@@ -31,6 +32,13 @@ function buildMissionService() {
         const total = await missionRepository.count({});
 
         const missions = await missionRepository.find({});
+        return { total, missions };
+    }
+
+    async function getMissionsByUser(user: User) {
+        const total = await missionRepository.count({});
+
+        const missions = await missionRepository.find({ where: { user } });
         return { total, missions };
     }
 

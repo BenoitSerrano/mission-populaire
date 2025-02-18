@@ -8,8 +8,8 @@ const fr = {
         },
     },
 
-    missionCreation: {
-        title: 'Créer une mission',
+    adCreation: {
+        title: 'Créer une annonce',
         form: {
             title: 'Titre',
             description: 'Description',
@@ -19,8 +19,8 @@ const fr = {
             },
         },
     },
-    missions: {
-        createMission: 'Créer une mission',
+    myAds: {
+        createAd: 'Créer une annonce',
     },
 
     missionDetails: {},

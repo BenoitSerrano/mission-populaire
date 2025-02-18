@@ -9,6 +9,7 @@ function buildMissionController() {
     const missionService = buildMissionService();
     const missionController = {
         getMissions,
+        getMyMissions,
         getMissionDetails,
         createMission,
         deleteMyMission,
@@ -22,6 +23,10 @@ function buildMissionController() {
 
     async function getMissions() {
         return missionService.getMissions();
+    }
+
+    async function getMyMissions(_params: {}, user: User) {
+        return missionService.getMissionsByUser(user);
     }
 
     async function createMission(

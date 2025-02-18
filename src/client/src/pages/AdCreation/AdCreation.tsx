@@ -10,7 +10,7 @@ import { TextInput } from '../../components/TextInput';
 import { pathHandler } from '../../lib/pathHandler';
 import { convertDateTextToTimestamp } from './lib/convertDateTextToTimestamp';
 
-function MissionCreation() {
+function AdCreation() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [deadlineDate, setDeadlineDate] = useState<string | undefined>();
@@ -30,14 +30,14 @@ function MissionCreation() {
 
     return (
         <Container>
-            <Title>{locale.missionCreation.title}</Title>
+            <Title>{locale.adCreation.title}</Title>
             <Form>
                 <InputContainer>
                     <TextInput
                         required
                         fullWidth
                         name="title"
-                        label={locale.missionCreation.form.title}
+                        label={locale.adCreation.form.title}
                         value={title}
                         setValue={setTitle}
                     />
@@ -49,13 +49,13 @@ function MissionCreation() {
                         isMultiline
                         fullWidth
                         name="description"
-                        label={locale.missionCreation.form.description}
+                        label={locale.adCreation.form.description}
                         value={description}
                         setValue={setDescription}
                     />
                 </InputContainer>
                 <InputContainer>
-                    <Text>{locale.missionCreation.form.deadline.date}</Text>
+                    <Text>{locale.adCreation.form.deadline.date}</Text>
                     <TextField
                         placeholder="La mission doit être achevée avant le ..."
                         variant="standard"
@@ -63,7 +63,7 @@ function MissionCreation() {
                         value={deadlineDate}
                         onChange={onChangeDeadlineDate}
                     />
-                    <Text>{locale.missionCreation.form.deadline.time}</Text>
+                    <Text>{locale.adCreation.form.deadline.time}</Text>
                     <TextField
                         placeholder="à ..."
                         variant="standard"
@@ -149,4 +149,4 @@ const FooterContent = styled('div')(({ theme }) => ({
 
 const Title = styled(Typography)(({ theme }) => ({}));
 
-export { MissionCreation };
+export { AdCreation };
