@@ -41,7 +41,7 @@ function AdsTable(props: { missions: adApiType[] }) {
                                 </Button>
                                 <IconButton
                                     IconComponent={DeleteForeverIcon}
-                                    onClick={() => navigateToMissionDetails(mission.id)}
+                                    onClick={() => navigateToEditMission(mission.id)}
                                     title="Éditer l'annonce"
                                 />
                                 <IconButton
@@ -59,8 +59,8 @@ function AdsTable(props: { missions: adApiType[] }) {
         </TableContainer>
     );
 
-    function navigateToMissionDetails(missionId: string) {
-        navigate(pathHandler.getRoutePath('MISSION_DETAILS', { missionId }));
+    function navigateToEditMission(missionId: string) {
+        navigate(pathHandler.getRoutePath('AD_EDITION', { missionId }));
     }
 }
 export { AdsTable };

@@ -6,6 +6,7 @@ const ROUTE_PATHS: Record<(typeof ROUTE_KEYS)[number], { path: string }> = {
     },
     MISSIONS: { path: '/missions' },
     AD_CREATION: { path: '/ads/new' },
+    AD_EDITION: { path: '/ads/:missionId/edit' },
     MY_ADS: { path: '/ads' },
     MISSION_DETAILS: {
         path: '/missions/:missionId',

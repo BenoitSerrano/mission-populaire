@@ -8,8 +8,9 @@ const fr = {
         },
     },
 
-    adCreation: {
-        title: 'Créer une annonce',
+    adUpsertion: {
+        addTitle: 'Créer une annonce',
+        editTitle: 'Éditer une annonce',
         form: {
             title: 'Titre',
             description: 'Description',

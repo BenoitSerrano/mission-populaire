@@ -5,6 +5,7 @@ const missionsApi = {
     getMissions,
     getMyMissions,
     getMissionDetails,
+    editMission,
     createMission,
     deleteMyMission,
 };
@@ -14,10 +15,25 @@ async function createMission(params: { title: string; description: string; deadl
     return performApiCall<adApiType>(URI, 'POST', params);
 }
 
+async function editMission(params: {
+    missionId: string;
+    title: string;
+    description: string;
+    deadline: number;
+}) {
+    const URI = `me/missions/${params.missionId}`;
+    return performApiCall<adApiType>(URI, 'PUT', {
+        title: params.title,
+        description: params.description,
+        deadline: params.deadline,
+    });
+}
+
 type missionApiType = {
     id: string;
     title: string;
     description: string;
+    deadline: string;
     publishedAt: string;
     application: applicationApiType | null;
 };

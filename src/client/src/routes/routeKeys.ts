@@ -3,6 +3,7 @@ const ROUTE_KEYS = [
     'MISSIONS',
     'MY_ADS',
     'AD_CREATION',
+    'AD_EDITION',
     'MISSION_DETAILS',
     'SIGN_IN',
 ] as const;
