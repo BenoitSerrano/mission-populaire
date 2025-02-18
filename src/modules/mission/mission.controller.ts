@@ -20,10 +20,8 @@ function buildMissionController() {
         return missionService.getMissionDetails(params.urlParams.missionId);
     }
 
-    async function getMissions(params: { query: { page?: string; perPage?: string } }) {
-        const { limit, offset } = extractPaginationParams(params.query);
-
-        return missionService.getMissions({ limit, offset });
+    async function getMissions() {
+        return missionService.getMissions();
     }
 
     async function createMission(

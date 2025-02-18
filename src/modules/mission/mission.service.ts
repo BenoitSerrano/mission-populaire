@@ -27,13 +27,10 @@ function buildMissionService() {
         return missionRepository.save(mission);
     }
 
-    async function getMissions(filter: { limit: number; offset: number }) {
+    async function getMissions() {
         const total = await missionRepository.count({});
 
-        const missions = await missionRepository.find({
-            skip: filter.offset,
-            take: filter.limit,
-        });
+        const missions = await missionRepository.find({});
         return { total, missions };
     }
 

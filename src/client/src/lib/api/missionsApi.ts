@@ -12,14 +12,11 @@ async function createMission(params: { title: string; description: string; deadl
     return performApiCall<missionApiType>(URI, 'POST', params);
 }
 
-type missionApiType = { id: string; title: string };
+type missionApiType = { id: string; title: string; description: string; publishedAt: string };
 
-async function getMissions(params: { page: number; perPage: number }) {
+async function getMissions(params: {}) {
     const URI = `missions`;
-    return performApiCall<{ total: number; missions: missionApiType[] }>(URI, 'GET', undefined, {
-        page: params.page,
-        perPage: params.perPage,
-    });
+    return performApiCall<{ total: number; missions: missionApiType[] }>(URI, 'GET', undefined, {});
 }
 
 async function getMissionDetails(missionId: string) {
