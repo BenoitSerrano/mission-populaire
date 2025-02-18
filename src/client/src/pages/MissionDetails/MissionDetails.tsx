@@ -1,22 +1,32 @@
 import { useParams } from 'react-router-dom';
 import { missionsApi } from '../../lib/api/missionsApi';
 import { Query } from '../../components/Query';
-import { Button, styled, Typography } from '@mui/material';
+import { styled, Typography } from '@mui/material';
 import { Section } from './Section';
+import { useState } from 'react';
+import { ApplicationModal } from './ApplicationModal';
+import { Button } from '../../components/Button';
 
 function MissionDetails() {
     const params = useParams<{ missionId: string }>();
     const missionId = params.missionId as string;
     const getMissionDetails = () => missionsApi.getMissionDetails(missionId);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <Container>
+            <ApplicationModal isOpen={isModalOpen} close={closeModal} missionId={missionId} />
             <Query apiCall={getMissionDetails} queryKey={['me', 'missions', missionId]}>
                 {(data) => (
                     <MissionContainer>
                         <TitleContainer>
                             <Typography variant="h1">{data.title}</Typography>
-                            <Button color="primary" variant="contained">
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={openModal}
+                                disabled={!!data.application}
+                            >
                                 Postuler
                             </Button>
                         </TitleContainer>
@@ -31,6 +41,14 @@ function MissionDetails() {
             </Query>
         </Container>
     );
+
+    function openModal() {
+        setIsModalOpen(true);
+    }
+
+    function closeModal() {
+        setIsModalOpen(false);
+    }
 }
 
 const Container = styled('div')(({ theme }) => ({

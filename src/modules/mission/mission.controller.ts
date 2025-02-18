@@ -17,8 +17,8 @@ function buildMissionController() {
 
     return missionController;
 
-    async function getMissionDetails(params: { urlParams: { missionId: string } }) {
-        return missionService.getMissionDetails(params.urlParams.missionId);
+    async function getMissionDetails(params: { urlParams: { missionId: string } }, user: User) {
+        return missionService.getMissionDetails(params.urlParams.missionId, user);
     }
 
     async function getMissions() {

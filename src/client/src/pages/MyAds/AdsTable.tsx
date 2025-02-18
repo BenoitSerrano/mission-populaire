@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { missionApiType, missionsApi } from '../../lib/api/missionsApi';
+import { adApiType, missionsApi } from '../../lib/api/missionsApi';
 import { useApiCall } from '../../lib/useApiCall';
 
 import { IconButton } from '../../components/IconButton';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { pathHandler } from '../../lib/pathHandler';
 import { Button } from '../../components/Button';
 
-function AdsTable(props: { missions: missionApiType[] }) {
+function AdsTable(props: { missions: adApiType[] }) {
     const deleteMyMissionApiCall = useApiCall({
         apiCall: missionsApi.deleteMyMission,
         successText: 'Mission supprimée',

@@ -1,4 +1,5 @@
 import { dataSource } from '../../dataSource';
+import { buildApplicationService } from '../application';
 import { User } from '../user';
 import { Mission } from './Mission.entity';
 import { missionDtoType } from './types';
@@ -7,6 +8,7 @@ export { buildMissionService };
 
 function buildMissionService() {
     const missionRepository = dataSource.getRepository(Mission);
+
     const missionService = {
         getMissions,
         getMissionsByUser,
@@ -42,11 +44,13 @@ function buildMissionService() {
         return { total, missions };
     }
 
-    async function getMissionDetails(missionId: Mission['id']) {
+    async function getMissionDetails(missionId: Mission['id'], user: User) {
+        const applicationService = buildApplicationService();
         const mission = await missionRepository.findOneByOrFail({
             id: missionId,
         });
-        return mission;
+        const application = await applicationService.retrieveApplication(missionId, user.id);
+        return { ...mission, application };
     }
 
     async function deleteMyMission(missionId: Mission['id'], user: User) {

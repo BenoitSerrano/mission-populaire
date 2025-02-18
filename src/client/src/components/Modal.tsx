@@ -98,8 +98,8 @@ const modalDefaultProperties = {
     display: 'flex',
     flexDirection: 'column' as const,
     overflow: 'auto',
-    minHeight: '90%',
-    maxHeight: '90%',
+    minHeight: '80%',
+    maxHeight: '80%',
 };
 
 const SmallModalContent = styled('div')(({ theme }) => ({
