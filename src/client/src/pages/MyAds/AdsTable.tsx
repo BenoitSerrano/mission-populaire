@@ -1,5 +1,16 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+    styled,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography,
+} from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+import FindInPageIcon from '@mui/icons-material/FindInPage';
 import { adApiType, missionsApi } from '../../lib/api/missionsApi';
 import { useApiCall } from '../../lib/useApiCall';
 
@@ -7,6 +18,9 @@ import { IconButton } from '../../components/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { pathHandler } from '../../lib/pathHandler';
 import { Button } from '../../components/Button';
+import { variabilize } from '../../locale/utils';
+import { locale } from '../../locale';
+import { computePublishedOn } from './lib/computePublishedOn';
 
 function AdsTable(props: { missions: adApiType[] }) {
     const deleteMyMissionApiCall = useApiCall({
@@ -21,26 +35,35 @@ function AdsTable(props: { missions: adApiType[] }) {
             <Table stickyHeader>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Titre</TableCell>
-                        <TableCell width="10%">Publié le</TableCell>
-                        <TableCell width="25%"></TableCell>
+                        <TableCell>Intitulé</TableCell>
+                        <TableCell width="30%"></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {props.missions.map((mission) => (
                         <TableRow key={mission.id}>
-                            <TableCell>{mission.title}</TableCell>
-                            <TableCell>{mission.publishedAt}</TableCell>
+                            <TableCell>
+                                <TitleContainer>
+                                    <Typography variant="h4">{mission.title}</Typography>
+                                    <Typography variant="h6">
+                                        {variabilize(locale.myAds.adsTable.publishedOn, {
+                                            publishedOn: computePublishedOn(mission.publishedAt),
+                                        })}
+                                    </Typography>
+                                </TitleContainer>
+                            </TableCell>
                             <TableCell>
                                 <Button
-                                    startIcon={<DeleteForeverIcon />}
+                                    color="inherit"
+                                    variant="outlined"
+                                    startIcon={<FindInPageIcon />}
                                     onClick={() => {}}
                                     title="Examiner les candidatures"
                                 >
                                     Examiner les candidatures
                                 </Button>
                                 <IconButton
-                                    IconComponent={DeleteForeverIcon}
+                                    IconComponent={EditIcon}
                                     onClick={() => navigateToEditMission(mission.id)}
                                     title="Éditer l'annonce"
                                 />
@@ -63,4 +86,6 @@ function AdsTable(props: { missions: adApiType[] }) {
         navigate(pathHandler.getRoutePath('AD_EDITION', { missionId }));
     }
 }
+
+const TitleContainer = styled('div')(({ theme }) => ({}));
 export { AdsTable };

@@ -22,6 +22,9 @@ const fr = {
     },
     myAds: {
         createAd: 'Créer une annonce',
+        adsTable: {
+            publishedOn: 'Publié le {{publishedOn}}',
+        },
     },
 
     missionDetails: {},
