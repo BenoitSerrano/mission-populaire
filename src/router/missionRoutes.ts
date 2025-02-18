@@ -18,6 +18,8 @@ const missionRoutes: Array<routeType<any, any, any>> = [
         controller: missionController.createMission,
         schema: Joi.object({
             title: Joi.string().required(),
+            description: Joi.string().required(),
+            deadline: Joi.number().required(),
         }),
     },
 

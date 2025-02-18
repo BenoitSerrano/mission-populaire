@@ -12,6 +12,11 @@ const fr = {
         title: 'Créer une mission',
         form: {
             title: 'Titre',
+            description: 'Description',
+            deadline: {
+                date: 'La mission doit se terminer avant le',
+                time: 'à',
+            },
         },
     },
     missions: {

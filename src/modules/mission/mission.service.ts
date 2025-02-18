@@ -19,6 +19,9 @@ function buildMissionService() {
     async function createMission(missionDto: missionDtoType, user: User) {
         const mission = new Mission();
         mission.title = missionDto.title;
+        mission.description = missionDto.description;
+        mission.deadline = new Date(missionDto.deadline).toISOString();
+        mission.status = 'open';
         mission.user = user;
 
         return missionRepository.save(mission);

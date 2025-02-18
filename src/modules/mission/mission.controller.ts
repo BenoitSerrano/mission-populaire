@@ -35,6 +35,8 @@ function buildMissionController() {
         return missionService.createMission(
             {
                 title: params.body.title,
+                description: params.body.description,
+                deadline: params.body.deadline,
             },
             user,
         );

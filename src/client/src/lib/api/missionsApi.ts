@@ -7,7 +7,7 @@ const missionsApi = {
     deleteMyMission,
 };
 
-async function createMission(params: { title: string }) {
+async function createMission(params: { title: string; description: string; deadline: number }) {
     const URI = `me/missions`;
     return performApiCall<missionApiType>(URI, 'POST', params);
 }

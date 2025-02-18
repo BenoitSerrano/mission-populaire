@@ -8,10 +8,12 @@ function TextInput(props: {
     type?: React.InputHTMLAttributes<unknown>['type'];
     placeholder?: string;
     autoFocus?: boolean;
+    minRows?: number;
     fullWidth?: boolean;
     disabled?: boolean;
     label: string;
     name?: string;
+    isMultiline?: boolean;
     required?: boolean;
     validate?: (value: string) => string | true;
 }) {
@@ -19,6 +21,8 @@ function TextInput(props: {
     const [errorText, setErrorText] = useState<string | undefined>(undefined);
     return (
         <TextField
+            multiline={props.isMultiline}
+            minRows={props.minRows}
             onBlur={() => setIsTouched(true)}
             required={props.required}
             type={props.type}
