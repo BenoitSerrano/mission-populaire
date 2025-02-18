@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'quicksand';
+    src: local('quicksand'), url(./fonts/quicksand.ttf) format('truetype');
+}
