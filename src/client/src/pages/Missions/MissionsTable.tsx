@@ -1,7 +1,6 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { missionApiType } from '../../lib/api/missionsApi';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton } from '../../components/IconButton';
 import { pathHandler } from '../../lib/pathHandler';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +25,7 @@ function MissionsTable(props: { missions: missionApiType[] }) {
                             <TableCell>{mission.publishedAt}</TableCell>
                             <TableCell>
                                 <IconButton
-                                    IconComponent={DeleteForeverIcon}
+                                    IconComponent={VisibilityIcon}
                                     onClick={() => navigateToMissionDetails(mission.id)}
                                     title="Voir la mission"
                                 />
