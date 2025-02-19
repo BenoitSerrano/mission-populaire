@@ -10,6 +10,10 @@ type applicationApiType = {
     status: applicationStatusType;
     content: string;
     appliedAt: string;
+    user: {
+        id: string;
+        displayName: string;
+    };
 };
 
 async function createApplication(params: { missionId: string; content: string }) {

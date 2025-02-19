@@ -8,6 +8,7 @@ const ROUTE_PATHS: Record<(typeof ROUTE_KEYS)[number], { path: string }> = {
     AD_CREATION: { path: '/ads/new' },
     AD_EDITION: { path: '/ads/:missionId/edit' },
     MY_ADS: { path: '/ads' },
+    AD_APPLICATIONS: { path: '/ads/:missionId/applications' },
     MISSION_DETAILS: {
         path: '/missions/:missionId',
     },

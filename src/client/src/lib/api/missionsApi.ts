@@ -1,3 +1,4 @@
+import { missionStatusType } from '../../types';
 import { applicationApiType } from './applicationsApi';
 import { performApiCall } from './utils';
 
@@ -5,6 +6,7 @@ const missionsApi = {
     getMissions,
     getMyMissions,
     getMissionDetails,
+    getMissionWithApplications,
     editMission,
     createMission,
     deleteMyMission,
@@ -34,10 +36,19 @@ type missionApiType = {
     title: string;
     description: string;
     deadline: string;
+    status: missionStatusType;
     publishedAt: string;
     application: applicationApiType | null;
 };
-type adApiType = { id: string; title: string; description: string; publishedAt: string };
+
+type adApiType = {
+    id: string;
+    title: string;
+    description: string;
+    status: missionStatusType;
+    publishedAt: string;
+    applicationCount: number;
+};
 
 async function getMissions(params: {}) {
     const URI = `missions`;
@@ -52,6 +63,11 @@ async function getMyMissions() {
 async function getMissionDetails(missionId: string) {
     const URI = `missions/${missionId}`;
     return performApiCall<missionApiType>(URI, 'GET');
+}
+
+async function getMissionWithApplications(missionId: string) {
+    const URI = `me/missions/${missionId}/applications`;
+    return performApiCall<{ mission: adApiType; applications: applicationApiType[] }>(URI, 'GET');
 }
 
 async function deleteMyMission(missionId: string) {

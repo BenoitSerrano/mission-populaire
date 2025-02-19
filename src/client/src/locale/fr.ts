@@ -24,6 +24,11 @@ const fr = {
         createAd: 'Créer une annonce',
         adsTable: {
             publishedOn: 'Publié le {{publishedOn}}',
+            missionStatusTitle: {
+                open: 'En recherche de candidat.e',
+                filled: 'Pourvue',
+                completed: 'Terminée',
+            },
         },
     },
 

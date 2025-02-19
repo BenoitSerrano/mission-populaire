@@ -1,3 +1,4 @@
+import { In } from 'typeorm';
 import { dataSource } from '../../dataSource';
 import { Mission } from '../mission';
 import { User } from '../user';
@@ -11,6 +12,8 @@ function buildApplicationService() {
     const applicationService = {
         createApplication,
         retrieveApplication,
+        getMappedApplicationCountByMission,
+        retrieveApplications,
     };
 
     function createApplication(applicationDto: applicationDtoType) {
@@ -29,6 +32,31 @@ function buildApplicationService() {
         return applicationRepository.findOneBy({
             mission: { id: missionId },
             user: { id: userId },
+        });
+    }
+
+    async function getMappedApplicationCountByMission(missionIds: Mission['id'][]) {
+        const applications = await applicationRepository.find({
+            where: { mission: { id: In(missionIds) } },
+            select: { id: true, mission: { id: true } },
+            relations: { mission: true },
+        });
+        const mappedApplicationCount: Record<Mission['id'], number> = {};
+        for (const missionId of missionIds) {
+            const count = applications.filter(
+                (application) => application.mission.id === missionId,
+            ).length;
+            mappedApplicationCount[missionId] = count;
+        }
+        return mappedApplicationCount;
+    }
+
+    function retrieveApplications(missionId: Mission['id']): Promise<Application[]> {
+        return applicationRepository.find({
+            where: {
+                mission: { id: missionId },
+            },
+            relations: { user: true },
         });
     }
 

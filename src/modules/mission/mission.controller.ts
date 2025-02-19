@@ -1,4 +1,3 @@
-import { extractPaginationParams } from '../../lib/pagination';
 import { User } from '../user';
 import { buildMissionService } from './mission.service';
 import { missionDtoType } from './types';
@@ -11,6 +10,7 @@ function buildMissionController() {
         getMissions,
         getMyMissions,
         getMissionDetails,
+        getMissionWithApplications,
         createMission,
         deleteMyMission,
     };
@@ -19,6 +19,10 @@ function buildMissionController() {
 
     async function getMissionDetails(params: { urlParams: { missionId: string } }, user: User) {
         return missionService.getMissionDetails(params.urlParams.missionId, user);
+    }
+
+    async function getMissionWithApplications(params: { urlParams: { missionId: string } }) {
+        return missionService.getMissionWithApplications(params.urlParams.missionId);
     }
 
     async function getMissions() {

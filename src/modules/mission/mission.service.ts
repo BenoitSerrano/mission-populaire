@@ -13,6 +13,7 @@ function buildMissionService() {
         getMissions,
         getMissionsByUser,
         getMissionDetails,
+        getMissionWithApplications,
         createMission,
         deleteMyMission,
     };
@@ -38,10 +39,29 @@ function buildMissionService() {
     }
 
     async function getMissionsByUser(user: User) {
+        const applicationService = buildApplicationService();
+
         const total = await missionRepository.count({});
 
         const missions = await missionRepository.find({ where: { user } });
-        return { total, missions };
+        const mappedApplicationCount = await applicationService.getMappedApplicationCountByMission(
+            missions.map(({ id }) => id),
+        );
+        return {
+            total,
+            missions: missions.map((mission) => ({
+                ...mission,
+                applicationCount: mappedApplicationCount[mission.id],
+            })),
+        };
+    }
+
+    async function getMissionWithApplications(missionId: Mission['id']) {
+        const applicationService = buildApplicationService();
+
+        const mission = await missionRepository.findOneByOrFail({ id: missionId });
+        const applications = await applicationService.retrieveApplications(missionId);
+        return { mission, applications };
     }
 
     async function getMissionDetails(missionId: Mission['id'], user: User) {
