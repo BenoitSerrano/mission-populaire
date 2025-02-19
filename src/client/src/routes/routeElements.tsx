@@ -7,20 +7,23 @@ import { AdCreation } from '../pages/AdUpsertion';
 import { MyAds } from '../pages/MyAds';
 import { AdEdition } from '../pages/AdUpsertion/AdEdition';
 import { AdApplications } from '../pages/AdApplications';
+import { Application } from '../pages/Application';
 
-type routeKindType = 'militant' | 'public' | 'chef';
+type routeRoleType = 'militant' | 'public' | 'chef';
 
 const ROUTE_ELEMENTS: Record<
     (typeof ROUTE_KEYS)[number],
-    { element: JSX.Element; kind: routeKindType }
+    | { element: JSX.Element; kind: 'public' }
+    | { element: JSX.Element; kind: 'authenticated'; roles: routeRoleType[] }
 > = {
     HOME: { element: <Home />, kind: 'public' },
-    MISSIONS: { element: <Missions />, kind: 'militant' },
-    MY_ADS: { element: <MyAds />, kind: 'chef' },
-    AD_CREATION: { element: <AdCreation />, kind: 'chef' },
-    AD_EDITION: { element: <AdEdition />, kind: 'chef' },
-    AD_APPLICATIONS: { element: <AdApplications />, kind: 'chef' },
-    MISSION_DETAILS: { element: <MissionDetails />, kind: 'militant' },
+    MISSIONS: { element: <Missions />, kind: 'authenticated', roles: ['militant'] },
+    MY_ADS: { element: <MyAds />, kind: 'authenticated', roles: ['chef'] },
+    AD_CREATION: { element: <AdCreation />, kind: 'authenticated', roles: ['chef'] },
+    AD_EDITION: { element: <AdEdition />, kind: 'authenticated', roles: ['chef'] },
+    AD_APPLICATIONS: { element: <AdApplications />, kind: 'authenticated', roles: ['chef'] },
+    APPLICATION: { element: <Application />, kind: 'authenticated', roles: ['chef', 'public'] },
+    MISSION_DETAILS: { element: <MissionDetails />, kind: 'authenticated', roles: ['militant'] },
     SIGN_IN: { element: <SignIn />, kind: 'public' },
 };
 

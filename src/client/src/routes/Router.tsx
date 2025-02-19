@@ -12,28 +12,33 @@ function Router() {
 }
 
 function renderElement(routeKey: routeKeyType) {
-    const { element, kind } = ROUTE_ELEMENTS[routeKey];
+    const ROUTE_ELEMENT = ROUTE_ELEMENTS[routeKey];
     const { path } = ROUTE_PATHS[routeKey];
     const documentTitle = ROUTE_TITLES[routeKey];
 
-    switch (kind) {
+    switch (ROUTE_ELEMENT.kind) {
         case 'public':
-            return (
-                <Route
-                    key={path}
-                    path={path}
-                    element={<TitleWrapper documentTitle={documentTitle}>{element}</TitleWrapper>}
-                />
-            );
-        case 'chef':
-        case 'militant':
             return (
                 <Route
                     key={path}
                     path={path}
                     element={
                         <TitleWrapper documentTitle={documentTitle}>
-                            <AuthenticatedPage routeKey={routeKey}>{element}</AuthenticatedPage>
+                            {ROUTE_ELEMENT.element}
+                        </TitleWrapper>
+                    }
+                />
+            );
+        case 'authenticated':
+            return (
+                <Route
+                    key={path}
+                    path={path}
+                    element={
+                        <TitleWrapper documentTitle={documentTitle}>
+                            <AuthenticatedPage routeKey={routeKey}>
+                                {ROUTE_ELEMENT.element}
+                            </AuthenticatedPage>
                         </TitleWrapper>
                     }
                 />

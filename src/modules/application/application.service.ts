@@ -12,6 +12,7 @@ function buildApplicationService() {
     const applicationService = {
         createApplication,
         retrieveApplication,
+        getApplicationById,
         getMappedApplicationCountByMission,
         retrieveApplications,
     };
@@ -23,6 +24,10 @@ function buildApplicationService() {
             content: applicationDto.content,
             status: 'pending',
         });
+    }
+
+    async function getApplicationById(applicationId: Application['id']) {
+        return applicationRepository.findOneByOrFail({ id: applicationId });
     }
 
     function retrieveApplication(

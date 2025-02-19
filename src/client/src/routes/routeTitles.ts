@@ -7,6 +7,7 @@ const ROUTE_TITLES: Record<(typeof ROUTE_KEYS)[number], string> = {
     AD_EDITION: 'Éditer une annonce',
     MY_ADS: 'Mes annonces',
     AD_APPLICATIONS: 'Candidatures',
+    APPLICATION: 'Candidature',
     MISSION_DETAILS: 'Résumé de mission',
     SIGN_IN: 'Connexion',
 };
