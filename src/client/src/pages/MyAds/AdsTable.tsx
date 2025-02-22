@@ -37,7 +37,7 @@ function AdsTable(props: { missions: adApiType[] }) {
     const deleteMyMissionApiCall = useApiCall({
         apiCall: missionsApi.deleteMyMission,
         successText: 'Mission supprimée',
-        queryKeyToInvalidate: ['missions'],
+        queryKeyToInvalidate: ['me', 'missions'],
     });
     const navigate = useNavigate();
 

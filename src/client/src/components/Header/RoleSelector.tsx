@@ -1,10 +1,13 @@
-import { Menu, MenuItem, styled } from '@mui/material';
+import { ListItemIcon, ListItemText, Menu, MenuItem, styled } from '@mui/material';
 import { localSessionHandler } from '../../lib/localSessionHandler';
 import { Button } from '../Button';
 import { useState } from 'react';
 import { localStorage } from '../../lib/localStorage';
 import { roleType } from '../../lib/localStorage/roleHandler';
 import { useNavigate } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { pathHandler } from '../../lib/pathHandler';
 
 function RoleSelector() {
@@ -15,15 +18,23 @@ function RoleSelector() {
     if (!userInfo) {
         return <div />;
     }
+
+    const isMenuExpanded = !!menuAnchorEl;
+    const DropdownIconComponent = isMenuExpanded ? ArrowDropUpIcon : ArrowDropDownIcon;
     return (
         <Container>
-            <Button onClick={openMenu} color="inherit">
+            <Button onClick={openMenu} color="inherit" endIcon={<DropdownIconComponent />}>
                 {userInfo.displayName} ({currentRole})
             </Button>
             <Menu id="role-menu" anchorEl={menuAnchorEl} open={!!menuAnchorEl} onClose={closeMenu}>
                 <MenuItem onClick={buildSelectRole('MILITANT')}>Militant·e</MenuItem>
                 <MenuItem onClick={buildSelectRole('CHEF_GA')}>Chef·fe de GA</MenuItem>
-                <MenuItem onClick={logout}>Se déconnecter</MenuItem>
+                <MenuItem onClick={logout}>
+                    <ListItemIcon>
+                        <LogoutIcon />
+                    </ListItemIcon>
+                    <ListItemText>Se déconnecter</ListItemText>
+                </MenuItem>
             </Menu>
         </Container>
     );
@@ -36,14 +47,7 @@ function RoleSelector() {
         return () => {
             localStorage.roleHandler.set(role);
             closeMenu();
-            switch (role) {
-                case 'MILITANT':
-                    navigate(pathHandler.getRoutePath('MISSIONS'));
-                    break;
-                case 'CHEF_GA':
-                    navigate(pathHandler.getRoutePath('MY_ADS'));
-                    break;
-            }
+            navigate(pathHandler.getRoutePath('HOME'));
         };
     }
 
@@ -58,5 +62,4 @@ function RoleSelector() {
     }
 }
 const Container = styled('div')(({ theme }) => ({}));
-
 export { RoleSelector };
