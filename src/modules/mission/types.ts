@@ -1,7 +1,10 @@
+import { skillType } from '../user/types';
+
 type missionDtoType = {
     title: string;
     description: string;
     deadline: string;
+    requiredSkills: skillType[];
 };
 
 const MISSION_STATUSES = ['open', 'filled', 'completed'] as const;

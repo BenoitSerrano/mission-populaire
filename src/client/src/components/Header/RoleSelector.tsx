@@ -20,7 +20,7 @@ function RoleSelector() {
             <Button onClick={openMenu} color="inherit">
                 {userInfo.displayName} ({currentRole})
             </Button>
-            <Menu id="menu" anchorEl={menuAnchorEl} open={!!menuAnchorEl} onClose={closeMenu}>
+            <Menu id="role-menu" anchorEl={menuAnchorEl} open={!!menuAnchorEl} onClose={closeMenu}>
                 <MenuItem onClick={buildSelectRole('MILITANT')}>Militant·e</MenuItem>
                 <MenuItem onClick={buildSelectRole('CHEF_GA')}>Chef·fe de GA</MenuItem>
                 <MenuItem onClick={logout}>Se déconnecter</MenuItem>

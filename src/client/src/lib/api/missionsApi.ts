@@ -1,5 +1,6 @@
 import { missionStatusType } from '../../types';
 import { applicationApiType } from './applicationsApi';
+import { skillType } from './usersApi';
 import { performApiCall } from './utils';
 
 const missionsApi = {
@@ -7,27 +8,39 @@ const missionsApi = {
     getMyMissions,
     getMissionDetails,
     getMissionWithApplications,
-    editMission,
+    updateMission,
     createMission,
     deleteMyMission,
 };
 
-async function createMission(params: { title: string; description: string; deadline: number }) {
+async function createMission(params: {
+    title: string;
+    description: string;
+    deadline: number;
+    requiredSkills: string[];
+}) {
     const URI = `me/missions`;
-    return performApiCall<adApiType>(URI, 'POST', params);
+    return performApiCall<{ ok: true }>(URI, 'POST', {
+        title: params.title,
+        description: params.description,
+        deadline: `${params.deadline}`,
+        requiredSkills: params.requiredSkills,
+    });
 }
 
-async function editMission(params: {
+async function updateMission(params: {
     missionId: string;
     title: string;
     description: string;
     deadline: number;
+    requiredSkills: string[];
 }) {
     const URI = `me/missions/${params.missionId}`;
     return performApiCall<adApiType>(URI, 'PUT', {
         title: params.title,
         description: params.description,
-        deadline: params.deadline,
+        deadline: `${params.deadline}`,
+        requiredSkills: params.requiredSkills,
     });
 }
 
@@ -38,6 +51,7 @@ type missionApiType = {
     deadline: string;
     status: missionStatusType;
     publishedAt: string;
+    requiredSkills: skillType[];
     application: applicationApiType | null;
 };
 

@@ -9,9 +9,11 @@ import { Button } from '../../components/Button';
 import { pathHandler } from '../../lib/pathHandler';
 import { dateTextConverter } from './lib/dateTextConverter';
 import { AdUpsertionForm } from './AdUpsertionForm';
+import { skillType } from '../../lib/api/usersApi';
 
 function AdEditionForm(props: { mission: missionApiType }) {
     const [title, setTitle] = useState(props.mission.title);
+    const [requiredSkills, setRequiredSkills] = useState<skillType[]>(props.mission.requiredSkills);
     const [description, setDescription] = useState(props.mission.description);
     const deadline = dateTextConverter.convertTimestampToDateText(
         new Date(props.mission.deadline).getTime(),
@@ -21,10 +23,10 @@ function AdEditionForm(props: { mission: missionApiType }) {
     const { displayAlert } = useAlert();
     const navigate = useNavigate();
 
-    const createMissionApiCall = useApiCall({
-        apiCall: missionsApi.createMission,
+    const updateMissionApiCall = useApiCall({
+        apiCall: missionsApi.updateMission,
         onSuccess: () => {
-            displayAlert({ text: 'Vous avez bien créé une mission', variant: 'success' });
+            displayAlert({ text: 'La mission a bien été modifiée', variant: 'success' });
             setTitle('');
             navigate(pathHandler.getRoutePath('MY_ADS'));
         },
@@ -40,6 +42,8 @@ function AdEditionForm(props: { mission: missionApiType }) {
                 deadlineTime={deadlineTime}
                 description={description}
                 title={title}
+                requiredSkills={requiredSkills}
+                setRequiredSkills={setRequiredSkills}
                 setDeadlineDate={setDeadlineDate}
                 setDeadlineTime={setDeadlineTime}
                 setDescription={setDescription}
@@ -49,8 +53,8 @@ function AdEditionForm(props: { mission: missionApiType }) {
                 <FooterContent>
                     <Button
                         variant="contained"
-                        isLoading={createMissionApiCall.isLoading}
-                        onClick={createMission}
+                        isLoading={updateMissionApiCall.isLoading}
+                        onClick={updateMission}
                     >
                         Éditer l'annonce
                     </Button>
@@ -59,14 +63,16 @@ function AdEditionForm(props: { mission: missionApiType }) {
         </Container>
     );
 
-    function createMission() {
+    function updateMission() {
         const deadline = dateTextConverter.convertDateTextToTimestamp(
             `${deadlineDate} ${deadlineTime}`,
         );
-        createMissionApiCall.perform({
+        updateMissionApiCall.perform({
+            missionId: props.mission.id,
             title,
             deadline,
             description,
+            requiredSkills: requiredSkills.map((requiredSkill) => requiredSkill.label),
         });
     }
 }

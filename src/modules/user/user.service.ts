@@ -1,6 +1,6 @@
 import { dataSource } from '../../dataSource';
-import { hasher } from '../../lib/hasher';
 import { signer } from '../../lib/signer';
+import { SKILLS } from './types';
 import { User } from './User.entity';
 
 export { buildUserService };
@@ -10,6 +10,7 @@ function buildUserService() {
 
     const userService = {
         login,
+        getAvailableSkills,
     };
 
     return userService;
@@ -25,5 +26,9 @@ function buildUserService() {
         const userInfo = { displayName: user.displayName };
 
         return { token, userInfo };
+    }
+
+    async function getAvailableSkills() {
+        return Object.values(SKILLS);
     }
 }

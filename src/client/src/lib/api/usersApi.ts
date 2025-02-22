@@ -3,6 +3,7 @@ import { performApiCall } from './utils';
 
 const usersApi = {
     login,
+    getAvailableSkills,
 };
 
 async function login(params: { actionPopulaireId: string }) {
@@ -12,4 +13,12 @@ async function login(params: { actionPopulaireId: string }) {
     });
 }
 
+type skillType = { label: string; value: string };
+
+async function getAvailableSkills() {
+    const URI = `available-skills`;
+    return performApiCall<skillType[]>(URI, 'GET');
+}
+
 export { usersApi };
+export type { skillType };

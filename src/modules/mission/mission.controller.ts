@@ -11,6 +11,7 @@ function buildMissionController() {
         getMyMissions,
         getMissionDetails,
         getMissionWithApplications,
+        updateMission,
         createMission,
         deleteMyMission,
     };
@@ -33,6 +34,21 @@ function buildMissionController() {
         return missionService.getMissionsByUser(user);
     }
 
+    async function updateMission(
+        params: {
+            urlParams: { missionId: string };
+            body: missionDtoType;
+        },
+        user: User,
+    ) {
+        return missionService.updateMission(params.urlParams.missionId, {
+            title: params.body.title,
+            description: params.body.description,
+            deadline: params.body.deadline,
+            requiredSkills: params.body.requiredSkills,
+        });
+    }
+
     async function createMission(
         params: {
             body: missionDtoType;
@@ -44,6 +60,7 @@ function buildMissionController() {
                 title: params.body.title,
                 description: params.body.description,
                 deadline: params.body.deadline,
+                requiredSkills: params.body.requiredSkills,
             },
             user,
         );

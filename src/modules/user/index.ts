@@ -1,6 +1,6 @@
 import { User } from './User.entity';
 import { buildUserController } from './user.controller';
 import { buildUserService } from './user.service';
-import { SKILLS } from './types';
+import { SKILL_LABELS, SKILLS } from './types';
 
-export { User, buildUserController, buildUserService, SKILLS };
+export { User, buildUserController, buildUserService, SKILL_LABELS, SKILLS };

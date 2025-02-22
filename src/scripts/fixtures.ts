@@ -2,7 +2,7 @@ import { generateArray } from '../lib/utils';
 import crypto from 'crypto';
 import { Mission } from '../modules/mission';
 import { MISSION_STATUSES } from '../modules/mission';
-import { SKILLS, User } from '../modules/user';
+import { SKILL_LABELS, User } from '../modules/user';
 
 const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 
@@ -15,14 +15,14 @@ const MILITANT_DTOS: Array<userDto> = MILITANT_UUIDS.map((id, index) => ({
     actionPopulaireId: generateUuid(),
     id,
     displayName: `Militant ${index + 1}`,
-    skills: generateRandomValues(SKILLS, 1, 2),
+    skills: generateRandomValues(SKILL_LABELS, 1, 2),
 }));
 
 const ANIMATEURICE_DTOS: Array<userDto> = ANIMATEURICE_UUIDS.map((id, index) => ({
     actionPopulaireId: generateUuid(),
     id,
     displayName: `Animateurice ${index + 1}`,
-    skills: generateRandomValues(SKILLS, 1, 2),
+    skills: generateRandomValues(SKILL_LABELS, 1, 2),
 }));
 
 const USER_DTOS = [...MILITANT_DTOS, ...ANIMATEURICE_DTOS];
@@ -40,7 +40,7 @@ const MISSION_DTOS: Array<
         deadline,
         description: `DESCRIPTION ${index + 1}`,
         publishedAt: generatePublishedAt(deadline, 5),
-        requiredSkills: generateRandomValues(SKILLS, 1, 2),
+        requiredSkills: generateRandomValues(SKILL_LABELS, 1, 2),
         status: generateRandomValue(MISSION_STATUSES),
         userId: generateRandomValue(ANIMATEURICE_UUIDS),
     };

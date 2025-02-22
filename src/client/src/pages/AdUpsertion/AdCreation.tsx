@@ -9,12 +9,14 @@ import { Button } from '../../components/Button';
 import { pathHandler } from '../../lib/pathHandler';
 import { dateTextConverter } from './lib/dateTextConverter';
 import { AdUpsertionForm } from './AdUpsertionForm';
+import { skillType } from '../../lib/api/usersApi';
 
 function AdCreation() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [deadlineDate, setDeadlineDate] = useState<string>('');
     const [deadlineTime, setDeadlineTime] = useState<string>('23:59');
+    const [requiredSkills, setRequiredSkills] = useState<skillType[]>([]);
     const { displayAlert } = useAlert();
     const navigate = useNavigate();
 
@@ -34,6 +36,8 @@ function AdCreation() {
 
             <AdUpsertionForm
                 deadlineDate={deadlineDate}
+                requiredSkills={requiredSkills}
+                setRequiredSkills={setRequiredSkills}
                 deadlineTime={deadlineTime}
                 description={description}
                 title={title}
@@ -64,6 +68,7 @@ function AdCreation() {
             title,
             deadline,
             description,
+            requiredSkills: requiredSkills.map((requiredSkill) => requiredSkill.label),
         });
     }
 }

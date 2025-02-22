@@ -18,6 +18,7 @@ const fr = {
                 date: 'La mission doit se terminer avant le',
                 time: 'à',
             },
+            requiredSkills: { title: 'Compétence(s) nécessaire(s)', add: 'Ajouter une compétence' },
         },
     },
     myAds: {

@@ -11,6 +11,12 @@ const userRoutes: Array<routeType<any, any, any>> = [
         kind: 'public',
         controller: userController.login,
     },
+    {
+        method: 'GET',
+        path: '/available-skills',
+        kind: 'public',
+        controller: userController.getAvailableSkills,
+    },
 ];
 
 export { userRoutes };
