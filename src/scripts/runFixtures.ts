@@ -17,7 +17,7 @@ async function runFixtures() {
 
     console.log(`Inserting ${USER_DTOS.length} users...`);
 
-    await userRepository.insert(USER_DTOS.map((userDto) => ({ ...userDto })));
+    await userRepository.insert(USER_DTOS);
     console.log('Missions inserted!');
 
     console.log(`Inserting ${MISSION_DTOS.length} missions...`);

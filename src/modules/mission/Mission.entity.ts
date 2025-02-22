@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../user';
 import { MISSION_STATUSES, missionStatusType } from './types';
+import { skillType } from '../user/types';
 
 @Entity()
 export class Mission {
@@ -18,6 +19,9 @@ export class Mission {
 
     @Column('enum', { enum: MISSION_STATUSES })
     status: missionStatusType;
+
+    @Column('simple-array', { default: '' })
+    requiredSkills: skillType[];
 
     @ManyToOne(() => User, { onDelete: 'CASCADE', nullable: false })
     user: User;
