@@ -43,7 +43,10 @@ function buildMissionService() {
 
         const total = await missionRepository.count({});
 
-        const missions = await missionRepository.find({ where: { user } });
+        const missions = await missionRepository.find({
+            where: { user: { id: user.id } },
+        });
+
         const mappedApplicationCount = await applicationService.getMappedApplicationCountByMission(
             missions.map(({ id }) => id),
         );
