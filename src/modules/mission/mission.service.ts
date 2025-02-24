@@ -1,4 +1,5 @@
 import { dataSource } from '../../dataSource';
+import { eventEmitter } from '../../events/event.emitter';
 import { buildApplicationService } from '../application';
 import { SKILLS, User } from '../user';
 import { Mission } from './Mission.entity';
@@ -31,6 +32,10 @@ function buildMissionService() {
         mission.user = user;
 
         await missionRepository.save(mission);
+        eventEmitter.MISSION_CREATED.emit({
+            displayName: user.displayName,
+            message: 'Une nouvelle mission a été créée !',
+        });
         return { ok: true };
     }
 

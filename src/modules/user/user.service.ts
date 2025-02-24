@@ -11,6 +11,7 @@ function buildUserService() {
     const userService = {
         login,
         getAvailableSkills,
+        alertUser,
     };
 
     return userService;
@@ -33,5 +34,9 @@ function buildUserService() {
 
     async function getAvailableSkills() {
         return Object.values(SKILLS);
+    }
+
+    async function alertUser(data: { displayName: string; message: string }) {
+        console.log(`Un message a été envoyé au user ${data.displayName}: "${data.message}"`);
     }
 }

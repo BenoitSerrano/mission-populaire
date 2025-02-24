@@ -6,6 +6,7 @@ import { config } from '../config';
 import { dataSource } from '../dataSource';
 import { router } from '../router';
 import { logger } from '../lib/logger';
+import { subscribers } from '../events/subscribers';
 
 export { runApp };
 
@@ -14,6 +15,10 @@ async function runApp() {
     logger.info(`Data source has been initialized`);
 
     const app = Express();
+
+    for (const subscriber of subscribers) {
+        subscriber.subscribe();
+    }
 
     app.use('/api', bodyParser.json(), cors({ origin: config.HOST_URL }), router);
 
