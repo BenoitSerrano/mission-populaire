@@ -1,4 +1,4 @@
-type userInfoType = { displayName: string };
+type userInfoType = { displayName: string; skills: Array<{ label: string; value: string }> };
 const APPLICATION_STATUSES = ['pending', 'accepted', 'declined'] as const;
 type applicationStatusType = (typeof APPLICATION_STATUSES)[number];
 

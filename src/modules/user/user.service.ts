@@ -23,7 +23,10 @@ function buildUserService() {
         const user = await userRepository.findOneOrFail({ where: { actionPopulaireId } });
 
         const token = createJwt({ userId: user.id, displayName: user.displayName });
-        const userInfo = { displayName: user.displayName };
+        const userInfo = {
+            displayName: user.displayName,
+            skills: user.skills.map((skill) => SKILLS[skill]),
+        };
 
         return { token, userInfo };
     }

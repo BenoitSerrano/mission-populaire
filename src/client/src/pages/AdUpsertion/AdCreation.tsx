@@ -7,9 +7,9 @@ import { useState } from 'react';
 import { useAlert } from '../../lib/alert';
 import { Button } from '../../components/Button';
 import { pathHandler } from '../../lib/pathHandler';
-import { dateTextConverter } from './lib/dateTextConverter';
 import { AdUpsertionForm } from './AdUpsertionForm';
 import { skillType } from '../../lib/api/usersApi';
+import { dateTextConverter } from '../../lib/dateTextConverter';
 
 function AdCreation() {
     const [title, setTitle] = useState('');

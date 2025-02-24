@@ -7,7 +7,6 @@ import {
     TableHead,
     TableRow,
     Tooltip,
-    Typography,
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
@@ -18,14 +17,13 @@ import { IconButton } from '../../components/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { pathHandler } from '../../lib/pathHandler';
 import { Button } from '../../components/Button';
-import { variabilize } from '../../locale/utils';
 import { locale } from '../../locale';
-import { computePublishedOn } from './lib/computePublishedOn';
 import { missionStatusType } from '../../types';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { ElementType } from 'react';
+import { MissionTitleCell } from '../../components/MissionTitleCell';
 
 const missionStatusMapping: Record<missionStatusType, { IconComponent: ElementType }> = {
     completed: { IconComponent: EventAvailableIcon },
@@ -57,18 +55,8 @@ function AdsTable(props: { missions: adApiType[] }) {
                         const { IconComponent } = missionStatusMapping[mission.status];
                         return (
                             <TableRow key={mission.id}>
-                                <TableCell>
-                                    <>
-                                        <Typography variant="h4">{mission.title}</Typography>
-                                        <Typography variant="h6">
-                                            {variabilize(locale.myAds.adsTable.publishedOn, {
-                                                publishedOn: computePublishedOn(
-                                                    mission.publishedAt,
-                                                ),
-                                            })}
-                                        </Typography>
-                                    </>
-                                </TableCell>
+                                <MissionTitleCell mission={mission} />
+
                                 <TableCell>
                                     <CenteredContent>
                                         <Tooltip
