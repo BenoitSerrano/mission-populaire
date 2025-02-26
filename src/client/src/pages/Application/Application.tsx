@@ -2,6 +2,9 @@ import { useParams } from 'react-router-dom';
 import { applicationsApi } from '../../lib/api/applicationsApi';
 import { Query } from '../../components/Query';
 import { styled, Typography } from '@mui/material';
+import { variabilize } from '../../locale/utils';
+import { locale } from '../../locale';
+import { dateTextConverter } from '../../lib/dateTextConverter';
 
 function Application() {
     const params = useParams<{ applicationId: string }>();
@@ -9,10 +12,32 @@ function Application() {
     const getAdApplication = () => applicationsApi.getAdApplication({ applicationId });
     return (
         <Query apiCall={getAdApplication} queryKey={['ad-applications', applicationId]}>
-            {(application) => (
+            {({ application, ad, user }) => (
                 <Container>
                     <Page>
-                        <Title></Title>
+                        <PageContent>
+                            <TitleContainer>
+                                <Title variant="h2">{ad.title}</Title>
+                            </TitleContainer>
+                            <HeaderContainer>
+                                <Typography variant="h3">{user.displayName}</Typography>
+                                <Typography variant="h6">
+                                    {variabilize(locale.application.appliedAt, {
+                                        appliedAt: dateTextConverter.convertDateToReadableText(
+                                            new Date(application.appliedAt),
+                                        ),
+                                    })}
+                                </Typography>
+                            </HeaderContainer>
+                            <BodyContainer>
+                                <QuestionContainer>
+                                    <QuestionTitle>
+                                        Pourquoi votre profil est-il pertinent pour cette mission ?
+                                    </QuestionTitle>
+                                    <QuestionAnswer>{application.content}</QuestionAnswer>
+                                </QuestionContainer>
+                            </BodyContainer>
+                        </PageContent>
                     </Page>
                 </Container>
             )}
@@ -26,14 +51,36 @@ const Container = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
 }));
-const Title = styled(Typography)(({ theme }) => ({ background: 'red' }));
+const TitleContainer = styled('div')(({ theme }) => ({
+    flex: 1,
+    justifyContent: 'center',
+    display: 'flex',
+    marginBottom: theme.spacing(2),
+}));
+const HeaderContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(6),
+}));
+
+const QuestionContainer = styled('div')(({ theme }) => ({ marginBottom: theme.spacing(2) }));
+const QuestionTitle = styled(Typography)(({ theme }) => ({ marginBottom: theme.spacing(1) }));
+const QuestionAnswer = styled(Typography)(({ theme }) => ({}));
+
+const BodyContainer = styled('div')(({ theme }) => ({ display: 'flex' }));
+const Title = styled(Typography)(({ theme }) => ({}));
 const Page = styled('div')(({ theme }) => ({
     background: theme.palette.common.white,
     color: theme.palette.common.black,
+    display: 'flex',
     border: `solid 1px ${theme.palette.common.black}`,
-    borderRadius: '2px',
-    width: '40%',
+    borderRadius: '3px',
+    width: '60%',
     height: '95%',
+}));
+const PageContent = styled('div')(({ theme }) => ({
+    flex: 1,
+    padding: theme.spacing(3),
 }));
 
 export { Application };
