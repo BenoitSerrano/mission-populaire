@@ -17,6 +17,7 @@ function buildMissionService() {
         getAdDetails,
         getJobOfferDetails,
         getAdWithApplications,
+        setStatusFilled,
         updateAd,
         createAd,
         deleteAd,
@@ -41,6 +42,10 @@ function buildMissionService() {
             message: 'Une nouvelle mission a été créée !',
         });
         return { ok: true };
+    }
+
+    async function setStatusFilled(data: { missionId: string }) {
+        await missionRepository.update({ id: data.missionId }, { status: 'filled' });
     }
 
     async function updateAd(missionId: Mission['id'], missionDto: missionDtoType) {

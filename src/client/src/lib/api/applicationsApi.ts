@@ -30,7 +30,7 @@ async function pickApplication(params: {
     missionId: string;
     userId: string;
 }) {
-    const URI = `missions/${params.missionId}/applications/${params.applicationId}`;
+    const URI = `applications/${params.applicationId}`;
     return performApiCall(URI, 'PUT', { missionId: params.missionId, userId: params.userId });
 }
 
