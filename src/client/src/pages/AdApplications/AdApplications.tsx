@@ -6,13 +6,10 @@ import { ApplicationsTable } from './ApplicationsTable';
 function AdApplications() {
     const params = useParams<{ missionId: string }>();
     const missionId = params.missionId as string;
-    const getMissionWithApplications = () => missionsApi.getMissionWithApplications(missionId);
+    const getAdWithApplications = () => missionsApi.getAdWithApplications(missionId);
     return (
-        <Query
-            apiCall={getMissionWithApplications}
-            queryKey={['me', 'missions', missionId, 'with-applications']}
-        >
-            {({ mission, applications }) => <ApplicationsTable applications={applications} />}
+        <Query apiCall={getAdWithApplications} queryKey={['ads', missionId, 'with-applications']}>
+            {({ applications }) => <ApplicationsTable applications={applications} />}
         </Query>
     );
 }

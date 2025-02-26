@@ -13,17 +13,18 @@ function buildMissionService() {
 
     const missionService = {
         getJobOffers,
-        getMissionsByUser,
-        getMissionDetails,
-        getMissionWithApplications,
-        updateMission,
-        createMission,
-        deleteMyMission,
+        getAdsByUser,
+        getAdDetails,
+        getJobOfferDetails,
+        getAdWithApplications,
+        updateAd,
+        createAd,
+        deleteAd,
     };
 
     return missionService;
 
-    async function createMission(missionDto: missionDtoType, user: User) {
+    async function createAd(missionDto: missionDtoType, user: User) {
         const mission = new Mission();
         mission.title = missionDto.title;
         mission.description = missionDto.description;
@@ -40,7 +41,7 @@ function buildMissionService() {
         return { ok: true };
     }
 
-    async function updateMission(missionId: Mission['id'], missionDto: missionDtoType) {
+    async function updateAd(missionId: Mission['id'], missionDto: missionDtoType) {
         const result = await missionRepository.update(
             { id: missionId },
             { ...missionDto, deadline: new Date(Number(missionDto.deadline)).toISOString() },
@@ -80,7 +81,7 @@ function buildMissionService() {
         };
     }
 
-    async function getMissionsByUser(user: User) {
+    async function getAdsByUser(user: User) {
         const applicationService = buildApplicationService();
 
         const total = await missionRepository.count({});
@@ -94,7 +95,7 @@ function buildMissionService() {
         );
         return {
             total,
-            missions: missions.map((mission) => ({
+            ads: missions.map((mission) => ({
                 ...mission,
                 requiredSkills: mission.requiredSkills.map(
                     (requiredSkill) => SKILLS[requiredSkill],
@@ -104,13 +105,15 @@ function buildMissionService() {
         };
     }
 
-    async function getMissionWithApplications(missionId: Mission['id']) {
+    function convertMissionToAd(mission: Mission) {}
+
+    async function getAdWithApplications(missionId: Mission['id']) {
         const applicationService = buildApplicationService();
 
         const mission = await missionRepository.findOneByOrFail({ id: missionId });
         const applications = await applicationService.retrieveApplications(missionId);
         return {
-            mission: {
+            ad: {
                 ...mission,
                 requiredSkills: mission.requiredSkills.map(
                     (requiredSkill) => SKILLS[requiredSkill],
@@ -120,7 +123,7 @@ function buildMissionService() {
         };
     }
 
-    async function getMissionDetails(missionId: Mission['id'], user: User) {
+    async function getAdDetails(missionId: Mission['id'], user: User) {
         const applicationService = buildApplicationService();
         const mission = await missionRepository.findOneByOrFail({
             id: missionId,
@@ -133,7 +136,20 @@ function buildMissionService() {
         };
     }
 
-    async function deleteMyMission(missionId: Mission['id'], user: User) {
+    async function getJobOfferDetails(missionId: Mission['id'], user: User) {
+        const applicationService = buildApplicationService();
+        const mission = await missionRepository.findOneByOrFail({
+            id: missionId,
+        });
+        const application = await applicationService.retrieveApplication(missionId, user.id);
+        return {
+            ...mission,
+            requiredSkills: mission.requiredSkills.map((requiredSkill) => SKILLS[requiredSkill]),
+            application,
+        };
+    }
+
+    async function deleteAd(missionId: Mission['id'], user: User) {
         await missionRepository.delete({ id: missionId, user });
         return { ok: true };
     }

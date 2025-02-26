@@ -10,7 +10,7 @@ function Home(): JSX.Element {
     const role = localStorage.roleHandler.get();
     switch (role) {
         case 'CHEF_GA':
-            return <Navigate replace to={pathHandler.getRoutePath('MY_ADS')} />;
+            return <Navigate replace to={pathHandler.getRoutePath('ADS')} />;
         case 'MILITANT':
             return <Navigate replace to={pathHandler.getRoutePath('JOB_OFFERS')} />;
     }

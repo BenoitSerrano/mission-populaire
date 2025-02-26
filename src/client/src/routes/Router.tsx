@@ -24,7 +24,7 @@ function renderElement(routeKey: routeKeyType) {
                     path={path}
                     element={
                         <TitleWrapper documentTitle={documentTitle}>
-                            {ROUTE_ELEMENT.element()}
+                            {ROUTE_ELEMENT.element}
                         </TitleWrapper>
                     }
                 />
@@ -37,7 +37,7 @@ function renderElement(routeKey: routeKeyType) {
                     element={
                         <TitleWrapper documentTitle={documentTitle}>
                             <AuthenticatedPage routeKey={routeKey}>
-                                {ROUTE_ELEMENT.element()}
+                                {ROUTE_ELEMENT.element}
                             </AuthenticatedPage>
                         </TitleWrapper>
                     }

@@ -5,21 +5,22 @@ import { performApiCall } from './utils';
 
 const missionsApi = {
     getJobOffers,
-    getMyMissions,
-    getMissionDetails,
-    getMissionWithApplications,
-    updateMission,
-    createMission,
-    deleteMyMission,
+    getAds,
+    getJobOfferDetails,
+    getAdDetails,
+    getAdWithApplications,
+    updateAd,
+    createAd,
+    deleteAd,
 };
 
-async function createMission(params: {
+async function createAd(params: {
     title: string;
     description: string;
     deadline: number;
     requiredSkills: string[];
 }) {
-    const URI = `me/missions`;
+    const URI = `ads`;
     return performApiCall<{ ok: true }>(URI, 'POST', {
         title: params.title,
         description: params.description,
@@ -28,14 +29,14 @@ async function createMission(params: {
     });
 }
 
-async function updateMission(params: {
+async function updateAd(params: {
     missionId: string;
     title: string;
     description: string;
     deadline: number;
     requiredSkills: string[];
 }) {
-    const URI = `me/missions/${params.missionId}`;
+    const URI = `ads/${params.missionId}`;
     return performApiCall<adApiType>(URI, 'PUT', {
         title: params.title,
         description: params.description,
@@ -58,8 +59,10 @@ type missionApiType = {
 type adApiType = {
     id: string;
     title: string;
+    deadline: string;
     description: string;
     status: missionStatusType;
+    requiredSkills: skillType[];
     publishedAt: string;
     applicationCount: number;
 };
@@ -85,23 +88,28 @@ async function getJobOffers(params: {}) {
     );
 }
 
-async function getMyMissions() {
-    const URI = `me/missions`;
-    return performApiCall<{ total: number; missions: adApiType[] }>(URI, 'GET', undefined, {});
+async function getAds() {
+    const URI = `ads`;
+    return performApiCall<{ total: number; ads: adApiType[] }>(URI, 'GET', undefined, {});
 }
 
-async function getMissionDetails(missionId: string) {
-    const URI = `missions/${missionId}`;
-    return performApiCall<missionApiType>(URI, 'GET');
+async function getJobOfferDetails(missionId: string) {
+    const URI = `job-offers/${missionId}`;
+    return performApiCall<jobOfferApiType>(URI, 'GET');
 }
 
-async function getMissionWithApplications(missionId: string) {
-    const URI = `me/missions/${missionId}/applications`;
-    return performApiCall<{ mission: adApiType; applications: applicationApiType[] }>(URI, 'GET');
+async function getAdDetails(missionId: string) {
+    const URI = `ads/${missionId}`;
+    return performApiCall<adApiType>(URI, 'GET');
 }
 
-async function deleteMyMission(missionId: string) {
-    const URI = `me/missions/${missionId}`;
+async function getAdWithApplications(missionId: string) {
+    const URI = `ads/${missionId}/applications`;
+    return performApiCall<{ ad: adApiType; applications: applicationApiType[] }>(URI, 'GET');
+}
+
+async function deleteAd(missionId: string) {
+    const URI = `ads/${missionId}`;
     return performApiCall<{ ok: boolean }>(URI, 'DELETE');
 }
 

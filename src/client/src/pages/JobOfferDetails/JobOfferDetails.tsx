@@ -1,22 +1,22 @@
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { missionsApi } from '../../lib/api/missionsApi';
 import { Query } from '../../components/Query';
 import { styled, Typography } from '@mui/material';
 import { Section } from './Section';
-import { useState } from 'react';
 import { ApplicationModal } from './ApplicationModal';
 import { Button } from '../../components/Button';
 
-function MissionDetails() {
+function JobOfferDetails() {
     const params = useParams<{ missionId: string }>();
     const missionId = params.missionId as string;
-    const getMissionDetails = () => missionsApi.getMissionDetails(missionId);
+    const getJobOfferDetails = () => missionsApi.getJobOfferDetails(missionId);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <Container>
             <ApplicationModal isOpen={isModalOpen} close={closeModal} missionId={missionId} />
-            <Query apiCall={getMissionDetails} queryKey={['me', 'missions', missionId]}>
+            <Query apiCall={getJobOfferDetails} queryKey={['job-offers', missionId]}>
                 {(data) => (
                     <MissionContainer>
                         <TitleContainer>
@@ -71,4 +71,4 @@ const MissionContainer = styled('div')(({ theme }) => ({
     padding: theme.spacing(3),
 }));
 
-export { MissionDetails };
+export { JobOfferDetails };

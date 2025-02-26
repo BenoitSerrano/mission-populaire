@@ -5,10 +5,10 @@ const ROUTE_TITLES: Record<(typeof ROUTE_KEYS)[number], string> = {
     JOB_OFFERS: 'Offres',
     AD_CREATION: 'Créer une annonce',
     AD_EDITION: 'Éditer une annonce',
-    MY_ADS: 'Mes annonces',
+    ADS: 'Annonces',
     AD_APPLICATIONS: 'Candidatures',
-    APPLICATION: 'Candidature',
-    MISSION_DETAILS: 'Résumé de mission',
+    APPLICATION: 'Détail de la candidature',
+    JOB_OFFER_DETAILS: "Détail de l'offre",
     SIGN_IN: 'Connexion',
 };
 

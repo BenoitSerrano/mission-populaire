@@ -31,11 +31,11 @@ const missionStatusMapping: Record<missionStatusType, { IconComponent: ElementTy
     open: { IconComponent: PendingActionsIcon },
 };
 
-function AdsTable(props: { missions: adApiType[] }) {
+function AdsTable(props: { ads: adApiType[] }) {
     const deleteMyMissionApiCall = useApiCall({
-        apiCall: missionsApi.deleteMyMission,
-        successText: 'Mission supprimée',
-        queryKeyToInvalidate: ['me', 'missions'],
+        apiCall: missionsApi.deleteAd,
+        successText: "L'annonce a bien été supprimée",
+        queryKeyToInvalidate: ['ads'],
     });
     const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ function AdsTable(props: { missions: adApiType[] }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.missions.map((mission) => {
+                    {props.ads.map((mission) => {
                         const { IconComponent } = missionStatusMapping[mission.status];
                         return (
                             <TableRow key={mission.id}>

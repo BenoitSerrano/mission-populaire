@@ -55,8 +55,8 @@ function JobOffersTable(props: { jobOffers: jobOfferApiType[] }) {
                             <TableCell>
                                 <IconButton
                                     IconComponent={VisibilityIcon}
-                                    onClick={() => navigateToMissionDetails(jobOffer.id)}
-                                    title="Voir la mission"
+                                    onClick={() => navigateToJobOfferDetails(jobOffer.id)}
+                                    title="Voir l'offre"
                                 />
                             </TableCell>
                         </TableRow>
@@ -66,8 +66,9 @@ function JobOffersTable(props: { jobOffers: jobOfferApiType[] }) {
         </TableContainer>
     );
 
-    function navigateToMissionDetails(missionId: string) {
-        navigate(pathHandler.getRoutePath('MISSION_DETAILS', { missionId }));
+    function navigateToJobOfferDetails(missionId: string) {
+        const path = pathHandler.getRoutePath('JOB_OFFER_DETAILS', { missionId });
+        navigate(path);
     }
 }
 const RequiredSkillsContainer = styled('div')(({ theme }) => ({

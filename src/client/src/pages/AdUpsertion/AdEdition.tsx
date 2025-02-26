@@ -6,11 +6,11 @@ import { AdEditionForm } from './AdEditionForm';
 function AdEdition() {
     const params = useParams<{ missionId: string }>();
     const missionId = params.missionId as string;
-    const getMissionDetails = () => missionsApi.getMissionDetails(missionId);
+    const getAdDetails = () => missionsApi.getAdDetails(missionId);
 
     return (
-        <Query apiCall={getMissionDetails} queryKey={['me', 'missions', missionId]}>
-            {(data) => <AdEditionForm mission={data} />}
+        <Query apiCall={getAdDetails} queryKey={['ads', missionId]}>
+            {(data) => <AdEditionForm ad={data} />}
         </Query>
     );
 }

@@ -1,7 +1,7 @@
 import { styled, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { locale } from '../../locale';
-import { missionApiType, missionsApi } from '../../lib/api/missionsApi';
+import { adApiType, missionsApi } from '../../lib/api/missionsApi';
 import { useApiCall } from '../../lib/useApiCall';
 import { useState } from 'react';
 import { useAlert } from '../../lib/alert';
@@ -11,12 +11,12 @@ import { AdUpsertionForm } from './AdUpsertionForm';
 import { skillType } from '../../lib/api/usersApi';
 import { dateTextConverter } from '../../lib/dateTextConverter';
 
-function AdEditionForm(props: { mission: missionApiType }) {
-    const [title, setTitle] = useState(props.mission.title);
-    const [requiredSkills, setRequiredSkills] = useState<skillType[]>(props.mission.requiredSkills);
-    const [description, setDescription] = useState(props.mission.description);
+function AdEditionForm(props: { ad: adApiType }) {
+    const [title, setTitle] = useState(props.ad.title);
+    const [requiredSkills, setRequiredSkills] = useState<skillType[]>(props.ad.requiredSkills);
+    const [description, setDescription] = useState(props.ad.description);
     const deadline = dateTextConverter.convertTimestampToDateText(
-        new Date(props.mission.deadline).getTime(),
+        new Date(props.ad.deadline).getTime(),
     );
     const [deadlineDate, setDeadlineDate] = useState<string>(deadline.date);
     const [deadlineTime, setDeadlineTime] = useState<string>(deadline.time);
@@ -24,13 +24,13 @@ function AdEditionForm(props: { mission: missionApiType }) {
     const navigate = useNavigate();
 
     const updateMissionApiCall = useApiCall({
-        apiCall: missionsApi.updateMission,
+        apiCall: missionsApi.updateAd,
         onSuccess: () => {
-            displayAlert({ text: 'La mission a bien été modifiée', variant: 'success' });
+            displayAlert({ text: "L'annonce a bien été modifiée", variant: 'success' });
             setTitle('');
-            navigate(pathHandler.getRoutePath('MY_ADS'));
+            navigate(pathHandler.getRoutePath('ADS'));
         },
-        queryKeyToInvalidate: ['me', 'missions'],
+        queryKeyToInvalidate: ['ads'],
     });
 
     return (
@@ -68,7 +68,7 @@ function AdEditionForm(props: { mission: missionApiType }) {
             `${deadlineDate} ${deadlineTime}`,
         );
         updateMissionApiCall.perform({
-            missionId: props.mission.id,
+            missionId: props.ad.id,
             title,
             deadline,
             description,

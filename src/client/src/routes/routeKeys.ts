@@ -1,12 +1,12 @@
 const ROUTE_KEYS = [
     'HOME',
+    'JOB_OFFER_DETAILS',
     'JOB_OFFERS',
-    'MY_ADS',
+    'ADS',
     'AD_CREATION',
     'AD_EDITION',
     'APPLICATION',
     'AD_APPLICATIONS',
-    'MISSION_DETAILS',
     'SIGN_IN',
 ] as const;
 

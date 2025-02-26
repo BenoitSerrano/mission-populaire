@@ -7,7 +7,7 @@ import { locale } from '../../locale';
 import { useNavigate } from 'react-router-dom';
 import { pathHandler } from '../../lib/pathHandler';
 
-function MyAds() {
+function Ads() {
     const navigate = useNavigate();
 
     return (
@@ -15,8 +15,8 @@ function MyAds() {
             <Button variant="contained" onClick={navigateToCreateAd}>
                 {locale.myAds.createAd}
             </Button>
-            <Query apiCall={() => missionsApi.getMyMissions()} queryKey={['me', 'missions']}>
-                {(data) => <AdsTable missions={data.missions} />}
+            <Query apiCall={() => missionsApi.getAds()} queryKey={['ads']}>
+                {(data) => <AdsTable ads={data.ads} />}
             </Query>
         </Container>
     );
@@ -26,7 +26,7 @@ function MyAds() {
     }
 }
 
-export { MyAds };
+export { Ads };
 
 const Container = styled('div')(({ theme }) => ({
     display: 'flex',

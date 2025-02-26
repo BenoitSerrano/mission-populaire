@@ -21,13 +21,13 @@ function AdCreation() {
     const navigate = useNavigate();
 
     const createMissionApiCall = useApiCall({
-        apiCall: missionsApi.createMission,
+        apiCall: missionsApi.createAd,
         onSuccess: () => {
-            displayAlert({ text: 'Vous avez bien créé une mission', variant: 'success' });
+            displayAlert({ text: "L'annonce a bien été créée.", variant: 'success' });
             setTitle('');
-            navigate(pathHandler.getRoutePath('MY_ADS'));
+            navigate(pathHandler.getRoutePath('ADS'));
         },
-        queryKeyToInvalidate: ['me', 'missions'],
+        queryKeyToInvalidate: ['ads'],
     });
 
     return (

@@ -7,11 +7,11 @@ const ROUTE_PATHS: Record<(typeof ROUTE_KEYS)[number], { path: string }> = {
     JOB_OFFERS: { path: '/job-offers' },
     AD_CREATION: { path: '/ads/new' },
     AD_EDITION: { path: '/ads/:missionId/edit' },
-    MY_ADS: { path: '/ads' },
+    ADS: { path: '/ads' },
     AD_APPLICATIONS: { path: '/ads/:missionId/applications' },
     APPLICATION: { path: '/applications/:applicationId' },
-    MISSION_DETAILS: {
-        path: '/missions/:missionId',
+    JOB_OFFER_DETAILS: {
+        path: '/job-offers/:missionId',
     },
     SIGN_IN: { path: '/sign-in' },
 };

@@ -10,7 +10,7 @@ function ApplicationModal(props: { close: () => void; isOpen: boolean; missionId
     const createApplicationApiCall = useApiCall({
         apiCall: applicationsApi.createApplication,
         successText: 'Votre candidature a été prise en compte !',
-        queryKeyToInvalidate: ['me', 'missions', props.missionId],
+        queryKeyToInvalidate: ['job-offers', props.missionId],
         onSuccess: () => {
             setContent('');
             props.close();

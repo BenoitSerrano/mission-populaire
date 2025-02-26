@@ -14,21 +14,21 @@ const missionRoutes: Array<routeType<any, any, any>> = [
     },
     {
         method: 'GET',
-        path: '/me/missions',
+        path: '/ads',
         kind: 'authenticated',
-        controller: missionController.getMyMissions,
+        controller: missionController.getAds,
     },
     {
         method: 'GET',
-        path: '/me/missions/:missionId/applications',
+        path: '/ads/:missionId/applications',
         kind: 'authenticated',
-        controller: missionController.getMissionWithApplications,
+        controller: missionController.getAdWithApplications,
     },
     {
         method: 'PUT',
-        path: '/me/missions/:missionId',
+        path: '/ads/:missionId',
         kind: 'authenticated',
-        controller: missionController.updateMission,
+        controller: missionController.updateAd,
         schema: Joi.object({
             title: Joi.string().required(),
             description: Joi.string().required(),
@@ -40,9 +40,9 @@ const missionRoutes: Array<routeType<any, any, any>> = [
     },
     {
         method: 'POST',
-        path: '/me/missions',
+        path: '/ads',
         kind: 'authenticated',
-        controller: missionController.createMission,
+        controller: missionController.createAd,
         schema: Joi.object({
             title: Joi.string().required(),
             description: Joi.string().required(),
@@ -55,15 +55,21 @@ const missionRoutes: Array<routeType<any, any, any>> = [
 
     {
         method: 'GET',
-        path: '/missions/:missionId',
+        path: '/job-offers/:missionId',
         kind: 'authenticated',
-        controller: missionController.getMissionDetails,
+        controller: missionController.getJobOfferDetails,
+    },
+    {
+        method: 'GET',
+        path: '/ads/:missionId',
+        kind: 'authenticated',
+        controller: missionController.getAdDetails,
     },
     {
         method: 'DELETE',
         kind: 'authenticated',
-        path: '/me/missions/:missionId',
-        controller: missionController.deleteMyMission,
+        path: '/ads/:missionId',
+        controller: missionController.deleteAd,
     },
 ];
 
