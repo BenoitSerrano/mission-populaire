@@ -2,9 +2,8 @@ import { styled } from '@mui/material';
 import { missionsApi } from '../../lib/api/missionsApi';
 import { Query } from '../../components/Query';
 import { MissionsTable } from './MissionsTable';
-import { userInfoType } from '../../types';
 
-function Missions(props: { userInfo: userInfoType }) {
+function Missions() {
     return (
         <Container>
             <Query apiCall={() => missionsApi.getMissions({})} queryKey={['missions']}>

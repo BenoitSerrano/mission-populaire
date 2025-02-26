@@ -32,10 +32,6 @@ function renderElement(routeKey: routeKeyType) {
                 />
             );
         case 'authenticated':
-            const userInfo = localStorage.userInfoHandler.get();
-            if (!userInfo) {
-                return <Navigate to={pathHandler.getRoutePath('HOME')} />;
-            }
             return (
                 <Route
                     key={path}
@@ -43,7 +39,7 @@ function renderElement(routeKey: routeKeyType) {
                     element={
                         <TitleWrapper documentTitle={documentTitle}>
                             <AuthenticatedPage routeKey={routeKey}>
-                                {ROUTE_ELEMENT.element({ userInfo })}
+                                {ROUTE_ELEMENT.element()}
                             </AuthenticatedPage>
                         </TitleWrapper>
                     }

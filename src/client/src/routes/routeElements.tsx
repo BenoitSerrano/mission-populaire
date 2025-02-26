@@ -8,7 +8,6 @@ import { MyAds } from '../pages/MyAds';
 import { AdEdition } from '../pages/AdUpsertion/AdEdition';
 import { AdApplications } from '../pages/AdApplications';
 import { Application } from '../pages/Application';
-import { userInfoType } from '../types';
 
 type routeRoleType = 'militant' | 'public' | 'chef';
 
@@ -16,7 +15,7 @@ const ROUTE_ELEMENTS: Record<
     (typeof ROUTE_KEYS)[number],
     | { element: () => JSX.Element; kind: 'public' }
     | {
-          element: (props: { userInfo: userInfoType }) => JSX.Element;
+          element: () => JSX.Element;
           kind: 'authenticated';
           roles: routeRoleType[];
       }
