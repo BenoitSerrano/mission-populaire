@@ -9,7 +9,7 @@ function MissionTitleCell(props: { mission: { title: string; publishedAt: string
             <>
                 <Typography variant="h4">{props.mission.title}</Typography>
                 <Typography variant="h6">
-                    {variabilize(locale.myAds.adsTable.publishedOn, {
+                    {variabilize(locale.ads.adsTable.publishedOn, {
                         publishedOn: computePublishedOn(props.mission.publishedAt),
                     })}
                 </Typography>

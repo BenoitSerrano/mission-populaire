@@ -14,6 +14,10 @@ async function login(params: { actionPopulaireId: string }) {
 }
 
 type skillType = { label: string; value: string };
+type userApiType = {
+    id: string;
+    displayName: string;
+};
 
 async function getAvailableSkills() {
     const URI = `available-skills`;
@@ -21,4 +25,4 @@ async function getAvailableSkills() {
 }
 
 export { usersApi };
-export type { skillType };
+export type { skillType, userApiType };

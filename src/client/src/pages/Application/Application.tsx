@@ -1,17 +1,19 @@
 import { useParams } from 'react-router-dom';
 import { applicationsApi } from '../../lib/api/applicationsApi';
 import { Query } from '../../components/Query';
-import { styled } from '@mui/material';
+import { styled, Typography } from '@mui/material';
 
 function Application() {
     const params = useParams<{ applicationId: string }>();
     const applicationId = params.applicationId as string;
-    const getApplication = () => applicationsApi.getApplication({ applicationId });
+    const getAdApplication = () => applicationsApi.getAdApplication({ applicationId });
     return (
-        <Query apiCall={getApplication} queryKey={['applications', applicationId]}>
+        <Query apiCall={getAdApplication} queryKey={['ad-applications', applicationId]}>
             {(application) => (
                 <Container>
-                    <Page>truc</Page>
+                    <Page>
+                        <Title></Title>
+                    </Page>
                 </Container>
             )}
         </Query>
@@ -24,6 +26,7 @@ const Container = styled('div')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
 }));
+const Title = styled(Typography)(({ theme }) => ({ background: 'red' }));
 const Page = styled('div')(({ theme }) => ({
     background: theme.palette.common.white,
     color: theme.palette.common.black,

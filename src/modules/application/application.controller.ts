@@ -6,12 +6,12 @@ export { buildApplicationController };
 function buildApplicationController() {
     const applicationService = buildApplicationService();
     const applicationController = {
-        getApplication,
+        getAdApplication,
         createApplication,
     };
 
-    async function getApplication(params: { urlParams: { applicationId: string } }) {
-        return applicationService.getApplicationById(params.urlParams.applicationId);
+    async function getAdApplication(params: { urlParams: { applicationId: string } }) {
+        return applicationService.getAdApplicationById(params.urlParams.applicationId);
     }
 
     async function createApplication(

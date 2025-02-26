@@ -20,6 +20,7 @@ function buildMissionService() {
         updateAd,
         createAd,
         deleteAd,
+        convertMissionToAd,
     };
 
     return missionService;
@@ -110,6 +111,10 @@ function buildMissionService() {
         }));
     }
 
+    function convertMissionToAd(mission: Mission, applicationCount: number) {
+        return { ...mission, applicationCount };
+    }
+
     function convertMissionToJobOffer(mission: Mission, user: User) {
         const isUserCompetentSkillMapping = computeIsUserCompetentSkillMapping(user.skills);
         return {
@@ -133,7 +138,7 @@ function buildMissionService() {
                     (requiredSkill) => SKILLS[requiredSkill],
                 ),
             },
-            applications,
+            applications: applications.map(({ user, ...application }) => ({ user, application })),
         };
     }
 

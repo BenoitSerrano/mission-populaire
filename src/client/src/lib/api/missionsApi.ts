@@ -1,6 +1,6 @@
 import { missionStatusType } from '../../types';
 import { applicationApiType } from './applicationsApi';
-import { skillType } from './usersApi';
+import { skillType, userApiType } from './usersApi';
 import { performApiCall } from './utils';
 
 const missionsApi = {
@@ -96,7 +96,10 @@ async function getAdDetails(missionId: string) {
 
 async function getAdWithApplications(missionId: string) {
     const URI = `ads/${missionId}/applications`;
-    return performApiCall<{ ad: adApiType; applications: applicationApiType[] }>(URI, 'GET');
+    return performApiCall<{
+        ad: adApiType;
+        applications: Array<{ application: applicationApiType; user: userApiType }>;
+    }>(URI, 'GET');
 }
 
 async function deleteAd(missionId: string) {

@@ -13,7 +13,7 @@ function Ads() {
     return (
         <Container>
             <Button variant="contained" onClick={navigateToCreateAd}>
-                {locale.myAds.createAd}
+                {locale.ads.createAd}
             </Button>
             <Query apiCall={() => missionsApi.getAds()} queryKey={['ads']}>
                 {(data) => <AdsTable ads={data.ads} />}

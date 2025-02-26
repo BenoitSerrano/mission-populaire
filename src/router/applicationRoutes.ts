@@ -6,9 +6,9 @@ const applicationController = buildApplicationController();
 const applicationRoutes: Array<routeType<any, any, any>> = [
     {
         method: 'GET',
-        path: '/applications/:applicationId',
+        path: '/ad-applications/:applicationId',
         kind: 'authenticated',
-        controller: applicationController.getApplication,
+        controller: applicationController.getAdApplication,
     },
     {
         method: 'POST',

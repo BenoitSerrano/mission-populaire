@@ -21,7 +21,8 @@ const fr = {
             requiredSkills: { title: 'Compétence(s) nécessaire(s)', add: 'Ajouter une compétence' },
         },
     },
-    myAds: {
+    application: {},
+    ads: {
         createAd: 'Créer une annonce',
         adsTable: {
             publishedOn: 'Publié le {{publishedOn}}',

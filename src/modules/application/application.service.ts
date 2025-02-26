@@ -4,6 +4,7 @@ import { Mission } from '../mission';
 import { User } from '../user';
 import { Application } from './Application.entity';
 import { applicationDtoType } from './types';
+import { buildMissionService } from '../mission/mission.service';
 
 export { buildApplicationService };
 
@@ -12,7 +13,7 @@ function buildApplicationService() {
     const applicationService = {
         createApplication,
         retrieveApplication,
-        getApplicationById,
+        getAdApplicationById,
         getMappedApplicationCountByMission,
         retrieveApplications,
     };
@@ -26,8 +27,23 @@ function buildApplicationService() {
         });
     }
 
-    async function getApplicationById(applicationId: Application['id']) {
-        return applicationRepository.findOneByOrFail({ id: applicationId });
+    async function getApplicationCountForMissionId(missionId: Mission['id']) {
+        const applicationCount = await applicationRepository.count({
+            where: { mission: { id: missionId } },
+        });
+        return applicationCount;
+    }
+
+    async function getAdApplicationById(applicationId: Application['id']) {
+        const missionService = buildMissionService();
+        const applicationWithUserAndMission = await applicationRepository.findOneOrFail({
+            where: { id: applicationId },
+            relations: { user: true, mission: true },
+        });
+        const { user, mission, ...application } = applicationWithUserAndMission;
+        const applicationCount = await getApplicationCountForMissionId(mission.id);
+        const ad = missionService.convertMissionToAd(mission, applicationCount);
+        return { application, user, ad };
     }
 
     function retrieveApplication(

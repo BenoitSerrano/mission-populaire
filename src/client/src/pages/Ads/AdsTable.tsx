@@ -61,7 +61,7 @@ function AdsTable(props: { ads: adApiType[] }) {
                                     <CenteredContent>
                                         <Tooltip
                                             title={
-                                                locale.myAds.adsTable.missionStatusTitle[
+                                                locale.ads.adsTable.missionStatusTitle[
                                                     mission.status
                                                 ]
                                             }

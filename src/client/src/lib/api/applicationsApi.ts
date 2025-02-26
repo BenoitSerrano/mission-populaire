@@ -1,9 +1,11 @@
 import { applicationStatusType } from '../../types';
+import { adApiType } from './missionsApi';
+import { userApiType } from './usersApi';
 import { performApiCall } from './utils';
 
 const applicationsApi = {
     createApplication,
-    getApplication,
+    getAdApplication,
 };
 
 type applicationApiType = {
@@ -11,15 +13,14 @@ type applicationApiType = {
     status: applicationStatusType;
     content: string;
     appliedAt: string;
-    user: {
-        id: string;
-        displayName: string;
-    };
 };
 
-async function getApplication(params: { applicationId: string }) {
-    const URI = `applications/${params.applicationId}`;
-    return performApiCall<applicationApiType>(URI, 'GET');
+async function getAdApplication(params: { applicationId: string }) {
+    const URI = `ad-applications/${params.applicationId}`;
+    return performApiCall<{ application: applicationApiType; user: userApiType; ad: adApiType }>(
+        URI,
+        'GET',
+    );
 }
 
 async function createApplication(params: { missionId: string; content: string }) {

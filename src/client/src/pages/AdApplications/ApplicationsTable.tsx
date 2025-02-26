@@ -4,8 +4,11 @@ import { IconButton } from '../../components/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
 import { pathHandler } from '../../lib/pathHandler';
+import { userApiType } from '../../lib/api/usersApi';
 
-function ApplicationsTable(props: { applications: Array<applicationApiType> }) {
+function ApplicationsTable(props: {
+    applications: Array<{ application: applicationApiType; user: userApiType }>;
+}) {
     const navigate = useNavigate();
     return (
         <TableContainer>
@@ -18,9 +21,9 @@ function ApplicationsTable(props: { applications: Array<applicationApiType> }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.applications.map((application) => (
+                    {props.applications.map(({ application, user }) => (
                         <TableRow key={application.id}>
-                            <TableCell>{application.user.displayName}</TableCell>
+                            <TableCell>{user.displayName}</TableCell>
                             <TableCell>{application.appliedAt}</TableCell>
                             <TableCell>
                                 <IconButton
