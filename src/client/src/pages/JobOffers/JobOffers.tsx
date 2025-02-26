@@ -1,19 +1,19 @@
 import { styled } from '@mui/material';
 import { missionsApi } from '../../lib/api/missionsApi';
 import { Query } from '../../components/Query';
-import { MissionsTable } from './MissionsTable';
+import { JobOffersTable } from './JobOffersTable';
 
-function Missions() {
+function JobOffers() {
     return (
         <Container>
-            <Query apiCall={() => missionsApi.getMissions({})} queryKey={['missions']}>
-                {(data) => <MissionsTable missions={data.missions} />}
+            <Query apiCall={() => missionsApi.getJobOffers({})} queryKey={['job-offers']}>
+                {(data) => <JobOffersTable jobOffers={data.jobOffers} />}
             </Query>
         </Container>
     );
 }
 
-export { Missions };
+export { JobOffers };
 
 const Container = styled('div')(({ theme }) => ({
     display: 'flex',

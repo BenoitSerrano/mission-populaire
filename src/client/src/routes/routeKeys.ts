@@ -1,6 +1,6 @@
 const ROUTE_KEYS = [
     'HOME',
-    'MISSIONS',
+    'JOB_OFFERS',
     'MY_ADS',
     'AD_CREATION',
     'AD_EDITION',

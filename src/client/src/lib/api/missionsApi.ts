@@ -4,7 +4,7 @@ import { skillType } from './usersApi';
 import { performApiCall } from './utils';
 
 const missionsApi = {
-    getMissions,
+    getJobOffers,
     getMyMissions,
     getMissionDetails,
     getMissionWithApplications,
@@ -64,9 +64,25 @@ type adApiType = {
     applicationCount: number;
 };
 
-async function getMissions(params: {}) {
-    const URI = `missions`;
-    return performApiCall<{ total: number; missions: missionApiType[] }>(URI, 'GET', undefined, {});
+type jobOfferApiType = {
+    id: string;
+    title: string;
+    description: string;
+    deadline: string;
+    status: missionStatusType;
+    publishedAt: string;
+    requiredSkills: Array<skillType & { isCompetent: boolean }>;
+    application: applicationApiType | null;
+};
+
+async function getJobOffers(params: {}) {
+    const URI = `job-offers`;
+    return performApiCall<{ total: number; jobOffers: jobOfferApiType[] }>(
+        URI,
+        'GET',
+        undefined,
+        {},
+    );
 }
 
 async function getMyMissions() {
@@ -90,4 +106,4 @@ async function deleteMyMission(missionId: string) {
 }
 
 export { missionsApi };
-export type { missionApiType, adApiType };
+export type { missionApiType, adApiType, jobOfferApiType };

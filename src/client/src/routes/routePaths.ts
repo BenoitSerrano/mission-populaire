@@ -4,7 +4,7 @@ const ROUTE_PATHS: Record<(typeof ROUTE_KEYS)[number], { path: string }> = {
     HOME: {
         path: '/',
     },
-    MISSIONS: { path: '/missions' },
+    JOB_OFFERS: { path: '/job-offers' },
     AD_CREATION: { path: '/ads/new' },
     AD_EDITION: { path: '/ads/:missionId/edit' },
     MY_ADS: { path: '/ads' },

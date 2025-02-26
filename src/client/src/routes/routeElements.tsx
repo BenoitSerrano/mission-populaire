@@ -1,6 +1,6 @@
 import { Home } from '../pages/Home';
 import { ROUTE_KEYS } from './routeKeys';
-import { Missions } from '../pages/Missions';
+import { JobOffers } from '../pages/JobOffers';
 import { SignIn } from '../pages/SignIn';
 import { MissionDetails } from '../pages/MissionDetails/MissionDetails';
 import { AdCreation } from '../pages/AdUpsertion';
@@ -21,7 +21,7 @@ const ROUTE_ELEMENTS: Record<
       }
 > = {
     HOME: { element: Home, kind: 'public' },
-    MISSIONS: { element: Missions, kind: 'authenticated', roles: ['militant'] },
+    JOB_OFFERS: { element: JobOffers, kind: 'authenticated', roles: ['militant'] },
     MY_ADS: { element: MyAds, kind: 'authenticated', roles: ['chef'] },
     AD_CREATION: { element: AdCreation, kind: 'authenticated', roles: ['chef'] },
     AD_EDITION: { element: AdEdition, kind: 'authenticated', roles: ['chef'] },

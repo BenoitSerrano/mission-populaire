@@ -2,7 +2,7 @@ import { ROUTE_KEYS } from './routeKeys';
 
 const ROUTE_TITLES: Record<(typeof ROUTE_KEYS)[number], string> = {
     HOME: 'Accueil',
-    MISSIONS: 'Missions',
+    JOB_OFFERS: 'Offres de travail',
     AD_CREATION: 'Créer une annonce',
     AD_EDITION: 'Éditer une annonce',
     MY_ADS: 'Mes annonces',

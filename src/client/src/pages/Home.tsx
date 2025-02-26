@@ -12,7 +12,7 @@ function Home(): JSX.Element {
         case 'CHEF_GA':
             return <Navigate replace to={pathHandler.getRoutePath('MY_ADS')} />;
         case 'MILITANT':
-            return <Navigate replace to={pathHandler.getRoutePath('MISSIONS')} />;
+            return <Navigate replace to={pathHandler.getRoutePath('JOB_OFFERS')} />;
     }
 }
 

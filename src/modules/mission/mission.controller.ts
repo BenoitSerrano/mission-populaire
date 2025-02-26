@@ -7,7 +7,7 @@ export { buildMissionController };
 function buildMissionController() {
     const missionService = buildMissionService();
     const missionController = {
-        getMissions,
+        getJobOffers,
         getMyMissions,
         getMissionDetails,
         getMissionWithApplications,
@@ -26,8 +26,8 @@ function buildMissionController() {
         return missionService.getMissionWithApplications(params.urlParams.missionId);
     }
 
-    async function getMissions() {
-        return missionService.getMissions();
+    async function getJobOffers(_params: {}, user: User) {
+        return missionService.getJobOffers(user);
     }
 
     async function getMyMissions(_params: {}, user: User) {

@@ -9,14 +9,14 @@ import {
     TableHead,
     TableRow,
 } from '@mui/material';
-import { missionApiType } from '../../lib/api/missionsApi';
+import { jobOfferApiType } from '../../lib/api/missionsApi';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton } from '../../components/IconButton';
 import { pathHandler } from '../../lib/pathHandler';
 import { useNavigate } from 'react-router-dom';
 import { MissionTitleCell } from '../../components/MissionTitleCell';
 
-function MissionsTable(props: { missions: missionApiType[] }) {
+function JobOffersTable(props: { jobOffers: jobOfferApiType[] }) {
     const navigate = useNavigate();
 
     return (
@@ -30,12 +30,12 @@ function MissionsTable(props: { missions: missionApiType[] }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.missions.map((mission) => (
-                        <TableRow key={mission.id}>
-                            <MissionTitleCell mission={mission} />
+                    {props.jobOffers.map((jobOffer) => (
+                        <TableRow key={jobOffer.id}>
+                            <MissionTitleCell mission={jobOffer} />
                             <TableCell>
                                 <RequiredSkillsContainer>
-                                    {mission.requiredSkills.map((requiredSkill) => {
+                                    {jobOffer.requiredSkills.map((requiredSkill) => {
                                         return (
                                             <RequiredSkillItem key={requiredSkill.label}>
                                                 <Chip label={requiredSkill.value} />
@@ -47,7 +47,7 @@ function MissionsTable(props: { missions: missionApiType[] }) {
                             <TableCell>
                                 <IconButton
                                     IconComponent={VisibilityIcon}
-                                    onClick={() => navigateToMissionDetails(mission.id)}
+                                    onClick={() => navigateToMissionDetails(jobOffer.id)}
                                     title="Voir la mission"
                                 />
                             </TableCell>
@@ -71,4 +71,4 @@ const RequiredSkillItem = styled(ListItem)(({ theme }) => ({
     width: 'auto',
     paddingRight: theme.spacing(1),
 }));
-export { MissionsTable };
+export { JobOffersTable };

@@ -8,9 +8,9 @@ const missionController = buildMissionController();
 const missionRoutes: Array<routeType<any, any, any>> = [
     {
         method: 'GET',
-        path: '/missions',
+        path: '/job-offers',
         kind: 'authenticated',
-        controller: missionController.getMissions,
+        controller: missionController.getJobOffers,
     },
     {
         method: 'GET',

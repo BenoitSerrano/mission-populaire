@@ -3,9 +3,9 @@ import { pathHandler } from './pathHandler';
 describe('pathHandler', () => {
     describe('getRoutePath', () => {
         it('should return the generic route path if no parameters provided', () => {
-            const path = pathHandler.getRoutePath('MISSIONS');
+            const path = pathHandler.getRoutePath('JOB_OFFERS');
 
-            expect(path).toBe('/missions');
+            expect(path).toBe('/job-offers');
         });
 
         it('should return the route path with parameter', () => {
@@ -19,11 +19,11 @@ describe('pathHandler', () => {
 
     describe('extractParameters', () => {
         it('should return path with no parameter if path has no parameter', () => {
-            const path = pathHandler.getRoutePath('MISSIONS');
+            const path = pathHandler.getRoutePath('JOB_OFFERS');
 
             const parsedPath = pathHandler.parsePath(path);
 
-            expect(parsedPath?.routeKey).toEqual('MISSIONS');
+            expect(parsedPath?.routeKey).toEqual('JOB_OFFERS');
             expect(parsedPath?.parameters).toEqual({});
         });
 

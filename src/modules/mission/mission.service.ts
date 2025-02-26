@@ -2,6 +2,7 @@ import { dataSource } from '../../dataSource';
 import { eventEmitter } from '../../events/event.emitter';
 import { buildApplicationService } from '../application';
 import { SKILLS, User } from '../user';
+import { skillType } from '../user/types';
 import { Mission } from './Mission.entity';
 import { missionDtoType } from './types';
 
@@ -11,7 +12,7 @@ function buildMissionService() {
     const missionRepository = dataSource.getRepository(Mission);
 
     const missionService = {
-        getMissions,
+        getJobOffers,
         getMissionsByUser,
         getMissionDetails,
         getMissionWithApplications,
@@ -51,17 +52,30 @@ function buildMissionService() {
         return { ok: true };
     }
 
-    async function getMissions() {
+    function computeIsUserCompetentSkillMapping(skills: User['skills']) {
+        const isUserCompetentSkillMapping = Object.keys(SKILLS).reduce(
+            (acc, SKILL_LABEL) => ({ ...acc, [SKILL_LABEL]: false }),
+            {} as Record<skillType, boolean>,
+        );
+        for (const userSkill of skills) {
+            isUserCompetentSkillMapping[userSkill] = true;
+        }
+        return isUserCompetentSkillMapping;
+    }
+
+    async function getJobOffers(user: User) {
         const total = await missionRepository.count({});
 
-        const missions = await missionRepository.find({});
+        const jobOffers = await missionRepository.find({});
+        const isUserCompetentSkillMapping = computeIsUserCompetentSkillMapping(user.skills);
         return {
             total,
-            missions: missions.map((mission) => ({
-                ...mission,
-                requiredSkills: mission.requiredSkills.map(
-                    (requiredSkill) => SKILLS[requiredSkill],
-                ),
+            jobOffers: jobOffers.map((jobOffer) => ({
+                ...jobOffer,
+                requiredSkills: jobOffer.requiredSkills.map((requiredSkill) => ({
+                    ...SKILLS[requiredSkill],
+                    isCompetent: isUserCompetentSkillMapping[requiredSkill],
+                })),
             })),
         };
     }
