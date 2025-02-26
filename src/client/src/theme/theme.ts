@@ -19,8 +19,7 @@ const theme = createTheme({
     },
     spacing: (value: number) => value * 8,
     typography: {
-        fontFamily: ['quicksand', 'Trebuchet MS'].join(','),
-
+        fontFamily: ['poppins', 'Trebuchet MS'].join(','),
         h1: {
             fontSize: '2rem',
             fontWeight: 'normal',

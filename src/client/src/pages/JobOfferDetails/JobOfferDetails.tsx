@@ -6,6 +6,7 @@ import { styled, Typography } from '@mui/material';
 import { Section } from './Section';
 import { ApplicationModal } from './ApplicationModal';
 import { Button } from '../../components/Button';
+import { RequiredSkills } from '../../components/RequiredSkills';
 
 function JobOfferDetails() {
     const params = useParams<{ missionId: string }>();
@@ -17,24 +18,24 @@ function JobOfferDetails() {
         <Container>
             <ApplicationModal isOpen={isModalOpen} close={closeModal} missionId={missionId} />
             <Query apiCall={getJobOfferDetails} queryKey={['job-offers', missionId]}>
-                {(data) => (
+                {({ jobOffer, application }) => (
                     <MissionContainer>
                         <TitleContainer>
-                            <Typography variant="h1">{data.title}</Typography>
+                            <Typography variant="h1">{jobOffer.title}</Typography>
                             <Button
                                 color="primary"
                                 variant="contained"
                                 onClick={openModal}
-                                disabled={!!data.application}
+                                disabled={!!application}
                             >
                                 Postuler
                             </Button>
                         </TitleContainer>
                         <Section title="Informations importantes">
-                            <div></div>
+                            <RequiredSkills jobOffer={jobOffer} />
                         </Section>
                         <Section title="Description de la mission">
-                            <Typography>{data.description}</Typography>
+                            <Typography>{jobOffer.description}</Typography>
                         </Section>
                     </MissionContainer>
                 )}

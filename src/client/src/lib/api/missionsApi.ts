@@ -45,17 +45,6 @@ async function updateAd(params: {
     });
 }
 
-type missionApiType = {
-    id: string;
-    title: string;
-    description: string;
-    deadline: string;
-    status: missionStatusType;
-    publishedAt: string;
-    requiredSkills: skillType[];
-    application: applicationApiType | null;
-};
-
 type adApiType = {
     id: string;
     title: string;
@@ -75,7 +64,6 @@ type jobOfferApiType = {
     status: missionStatusType;
     publishedAt: string;
     requiredSkills: Array<skillType & { isCompetent: boolean }>;
-    application: applicationApiType | null;
 };
 
 async function getJobOffers(params: {}) {
@@ -95,7 +83,10 @@ async function getAds() {
 
 async function getJobOfferDetails(missionId: string) {
     const URI = `job-offers/${missionId}`;
-    return performApiCall<jobOfferApiType>(URI, 'GET');
+    return performApiCall<{ jobOffer: jobOfferApiType; application: applicationApiType | null }>(
+        URI,
+        'GET',
+    );
 }
 
 async function getAdDetails(missionId: string) {
@@ -114,4 +105,4 @@ async function deleteAd(missionId: string) {
 }
 
 export { missionsApi };
-export type { missionApiType, adApiType, jobOfferApiType };
+export type { adApiType, jobOfferApiType };

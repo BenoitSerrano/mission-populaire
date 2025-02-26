@@ -67,17 +67,11 @@ function buildMissionService() {
     async function getJobOffers(user: User) {
         const total = await missionRepository.count({});
 
-        const jobOffers = await missionRepository.find({});
-        const isUserCompetentSkillMapping = computeIsUserCompetentSkillMapping(user.skills);
+        const missions = await missionRepository.find({});
+        const jobOffers = convertMissionsToJobOffer(missions, user);
         return {
             total,
-            jobOffers: jobOffers.map((jobOffer) => ({
-                ...jobOffer,
-                requiredSkills: jobOffer.requiredSkills.map((requiredSkill) => ({
-                    ...SKILLS[requiredSkill],
-                    isCompetent: isUserCompetentSkillMapping[requiredSkill],
-                })),
-            })),
+            jobOffers,
         };
     }
 
@@ -105,7 +99,27 @@ function buildMissionService() {
         };
     }
 
-    function convertMissionToAd(mission: Mission) {}
+    function convertMissionsToJobOffer(missions: Mission[], user: User) {
+        const isUserCompetentSkillMapping = computeIsUserCompetentSkillMapping(user.skills);
+        return missions.map((mission) => ({
+            ...mission,
+            requiredSkills: mission.requiredSkills.map((requiredSkill) => ({
+                ...SKILLS[requiredSkill],
+                isCompetent: isUserCompetentSkillMapping[requiredSkill],
+            })),
+        }));
+    }
+
+    function convertMissionToJobOffer(mission: Mission, user: User) {
+        const isUserCompetentSkillMapping = computeIsUserCompetentSkillMapping(user.skills);
+        return {
+            ...mission,
+            requiredSkills: mission.requiredSkills.map((requiredSkill) => ({
+                ...SKILLS[requiredSkill],
+                isCompetent: isUserCompetentSkillMapping[requiredSkill],
+            })),
+        };
+    }
 
     async function getAdWithApplications(missionId: Mission['id']) {
         const applicationService = buildApplicationService();
@@ -141,10 +155,10 @@ function buildMissionService() {
         const mission = await missionRepository.findOneByOrFail({
             id: missionId,
         });
+        const jobOffer = convertMissionToJobOffer(mission, user);
         const application = await applicationService.retrieveApplication(missionId, user.id);
         return {
-            ...mission,
-            requiredSkills: mission.requiredSkills.map((requiredSkill) => SKILLS[requiredSkill]),
+            jobOffer,
             application,
         };
     }

@@ -4,6 +4,6 @@ body {
 }
 
 @font-face {
-    font-family: 'quicksand';
-    src: local('quicksand'), url(./fonts/quicksand.ttf) format('truetype');
+    font-family: 'poppins';
+    src: local('poppins'), url(./fonts/Poppins-Regular.ttf) format('truetype');
 }

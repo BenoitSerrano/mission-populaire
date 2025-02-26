@@ -1,21 +1,11 @@
-import {
-    Chip,
-    ListItem,
-    styled,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-} from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { jobOfferApiType } from '../../lib/api/missionsApi';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton } from '../../components/IconButton';
 import { pathHandler } from '../../lib/pathHandler';
 import { useNavigate } from 'react-router-dom';
 import { MissionTitleCell } from '../../components/MissionTitleCell';
+import { RequiredSkills } from '../../components/RequiredSkills';
 
 function JobOffersTable(props: { jobOffers: jobOfferApiType[] }) {
     const navigate = useNavigate();
@@ -35,22 +25,7 @@ function JobOffersTable(props: { jobOffers: jobOfferApiType[] }) {
                         <TableRow key={jobOffer.id}>
                             <MissionTitleCell mission={jobOffer} />
                             <TableCell>
-                                <RequiredSkillsContainer>
-                                    {jobOffer.requiredSkills.map((requiredSkill) => {
-                                        return (
-                                            <RequiredSkillItem key={requiredSkill.label}>
-                                                <Chip
-                                                    icon={
-                                                        requiredSkill.isCompetent ? (
-                                                            <StarIcon color="success" />
-                                                        ) : undefined
-                                                    }
-                                                    label={requiredSkill.value}
-                                                />
-                                            </RequiredSkillItem>
-                                        );
-                                    })}
-                                </RequiredSkillsContainer>
+                                <RequiredSkills jobOffer={jobOffer} />
                             </TableCell>
                             <TableCell>
                                 <IconButton
@@ -71,13 +46,5 @@ function JobOffersTable(props: { jobOffers: jobOfferApiType[] }) {
         navigate(path);
     }
 }
-const RequiredSkillsContainer = styled('div')(({ theme }) => ({
-    display: 'flex',
-    flexWrap: 'wrap',
-}));
-const RequiredSkillItem = styled(ListItem)(({ theme }) => ({
-    paddingLeft: theme.spacing(1),
-    width: 'auto',
-    paddingRight: theme.spacing(1),
-}));
+
 export { JobOffersTable };
