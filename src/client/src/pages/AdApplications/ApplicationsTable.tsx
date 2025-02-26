@@ -5,6 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
 import { pathHandler } from '../../lib/pathHandler';
 import { userApiType } from '../../lib/api/usersApi';
+import { ApplicationStatusIcon } from '../../components/ApplicationStatusIcon';
 
 function ApplicationsTable(props: {
     applications: Array<{ application: applicationApiType; user: userApiType }>;
@@ -17,6 +18,7 @@ function ApplicationsTable(props: {
                     <TableRow>
                         <TableCell>Militant·e</TableCell>
                         <TableCell>Date de candidature</TableCell>
+                        <TableCell width="5%">Statut</TableCell>
                         <TableCell width="5%"></TableCell>
                     </TableRow>
                 </TableHead>
@@ -25,6 +27,12 @@ function ApplicationsTable(props: {
                         <TableRow key={application.id}>
                             <TableCell>{user.displayName}</TableCell>
                             <TableCell>{application.appliedAt}</TableCell>
+                            <TableCell>
+                                <ApplicationStatusIcon
+                                    applicationStatus={application.status}
+                                    fontSize="medium"
+                                />
+                            </TableCell>
                             <TableCell>
                                 <IconButton
                                     title="Examiner la candidature"

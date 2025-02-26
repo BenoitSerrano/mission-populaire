@@ -1,3 +1,3 @@
-const eventNames = ['MISSION_CREATED'] as const;
+const eventNames = ['MISSION_CREATED', 'APPLICATION_PICKED'] as const;
 
 export { eventNames };

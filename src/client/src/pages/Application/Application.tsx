@@ -5,6 +5,11 @@ import { styled, Typography } from '@mui/material';
 import { variabilize } from '../../locale/utils';
 import { locale } from '../../locale';
 import { dateTextConverter } from '../../lib/dateTextConverter';
+import { ApplicationMenu } from './ApplicationMenu';
+import { PAGE_PERCENTAGE_WIDTH } from './constants';
+import { ApplicationStatusIcon } from '../../components/ApplicationStatusIcon';
+
+const MENU_MAX_WIDTH = 100 - PAGE_PERCENTAGE_WIDTH;
 
 function Application() {
     const params = useParams<{ applicationId: string }>();
@@ -17,10 +22,25 @@ function Application() {
         >
             {({ application, jobOffer, user }) => (
                 <Container>
+                    <MenuContainer>
+                        <ApplicationMenu
+                            application={application}
+                            missionId={jobOffer.id}
+                            userId={user.id}
+                        />
+                    </MenuContainer>
                     <Page>
                         <PageContent>
                             <TitleContainer>
                                 <Title variant="h2">{jobOffer.title}</Title>
+                                {application.status !== 'pending' && (
+                                    <ApplicationStatusIconContainer>
+                                        <ApplicationStatusIcon
+                                            fontSize="large"
+                                            applicationStatus={application.status}
+                                        />
+                                    </ApplicationStatusIconContainer>
+                                )}
                             </TitleContainer>
                             <HeaderContainer>
                                 <UserDetailContainer>
@@ -55,12 +75,21 @@ const Container = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
+}));
+const MenuContainer = styled('div')(({ theme }) => ({
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    maxWidth: `${MENU_MAX_WIDTH}%`,
+    display: 'flex',
 }));
 const TitleContainer = styled('div')(({ theme }) => ({
     flex: 1,
+    position: 'relative',
     justifyContent: 'center',
     display: 'flex',
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(3),
 }));
 const UserDetailContainer = styled('div')(({ theme }) => ({}));
 const HeaderContainer = styled('div')(({ theme }) => ({
@@ -81,11 +110,18 @@ const Page = styled('div')(({ theme }) => ({
     display: 'flex',
     border: `solid 1px ${theme.palette.common.black}`,
     borderRadius: '3px',
-    width: '60%',
+    width: `${PAGE_PERCENTAGE_WIDTH}%`,
     height: '95%',
 }));
+const ApplicationStatusIconContainer = styled('div')(({ theme }) => ({
+    position: 'absolute',
+    right: 0,
+    top: 0,
+}));
+
 const PageContent = styled('div')(({ theme }) => ({
     flex: 1,
+    position: 'relative',
     padding: theme.spacing(3),
 }));
 

@@ -22,7 +22,13 @@ const fr = {
         },
     },
     application: {
+        pick: 'Choisir',
         appliedAt: 'Postulé le {{appliedAt}}',
+        applicationStatusTitle: {
+            declined: 'Candidature refusée',
+            accepted: 'Candidature acceptée',
+            pending: "Candidature en cours d'examen",
+        },
     },
     ads: {
         createAd: 'Créer une annonce',

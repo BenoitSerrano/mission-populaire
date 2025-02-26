@@ -19,14 +19,8 @@ const Container = styled('div')(({ theme }) => ({
     flex: 1,
     display: 'flex',
 }));
-const ContentContainer = styled('div')(({ theme }) => ({
-    background: theme.palette.common.black,
-    flex: 1,
-    display: 'flex',
-}));
 
 const MainContainer = styled('div')(({ theme }) => ({
-    background: 'red',
     height: '100vh',
     flex: 1,
 }));

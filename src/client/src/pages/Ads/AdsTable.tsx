@@ -46,7 +46,7 @@ function AdsTable(props: { ads: adApiType[] }) {
                     <TableRow>
                         <TableCell>Intitulé</TableCell>
                         <TableCell width="5%">Statut</TableCell>
-                        <TableCell width="5%">Nombre de candidatures</TableCell>
+                        <TableCell width="5%">Candidatures</TableCell>
                         <TableCell width="30%"></TableCell>
                     </TableRow>
                 </TableHead>

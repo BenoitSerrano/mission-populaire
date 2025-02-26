@@ -1,21 +1,23 @@
-import { In } from 'typeorm';
+import { In, Not } from 'typeorm';
 import { dataSource } from '../../dataSource';
 import { Mission } from '../mission';
 import { User } from '../user';
 import { Application } from './Application.entity';
 import { applicationDtoType } from './types';
 import { buildMissionService } from '../mission/mission.service';
+import { eventEmitter } from '../../events/event.emitter';
 
 export { buildApplicationService };
 
 function buildApplicationService() {
     const applicationRepository = dataSource.getRepository(Application);
     const applicationService = {
-        createApplication,
-        retrieveApplication,
         getJobOfferApplicationById,
-        getMappedApplicationCountByMission,
+        retrieveApplication,
         retrieveApplications,
+        getMappedApplicationCountByMission,
+        pickApplication,
+        createApplication,
     };
 
     function createApplication(applicationDto: applicationDtoType) {
@@ -46,6 +48,30 @@ function buildApplicationService() {
             mission: { id: missionId },
             user: { id: userId },
         });
+    }
+
+    async function pickApplication(criteria: {
+        missionId: Mission['id'];
+        applicationId: Application['id'];
+        userId: User['id'];
+    }) {
+        const acceptedApplications = await applicationRepository.count({
+            where: { mission: { id: criteria.missionId }, status: 'accepted' },
+        });
+        if (acceptedApplications > 0) {
+            throw new Error(`Could not accept several applications for the same mission`);
+        }
+        await applicationRepository.update({ id: criteria.applicationId }, { status: 'accepted' });
+        await applicationRepository.update(
+            { id: Not(criteria.applicationId), mission: { id: criteria.missionId } },
+            { status: 'declined' },
+        );
+        eventEmitter.APPLICATION_PICKED.emit({
+            applicationId: criteria.applicationId,
+            missionId: criteria.missionId,
+            userId: criteria.userId,
+        });
+        return { ok: true };
     }
 
     async function getMappedApplicationCountByMission(missionIds: Mission['id'][]) {

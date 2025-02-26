@@ -5,6 +5,7 @@ import { performApiCall } from './utils';
 
 const applicationsApi = {
     createApplication,
+    pickApplication,
     getJobOfferApplication,
 };
 
@@ -22,6 +23,15 @@ async function getJobOfferApplication(params: { applicationId: string }) {
         user: userApiType;
         jobOffer: jobOfferApiType;
     }>(URI, 'GET');
+}
+
+async function pickApplication(params: {
+    applicationId: string;
+    missionId: string;
+    userId: string;
+}) {
+    const URI = `missions/${params.missionId}/applications/${params.applicationId}`;
+    return performApiCall(URI, 'PUT', { missionId: params.missionId, userId: params.userId });
 }
 
 async function createApplication(params: { missionId: string; content: string }) {
