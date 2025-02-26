@@ -2,11 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { missionsApi } from '../../lib/api/missionsApi';
 import { Query } from '../../components/Query';
-import { styled, Typography } from '@mui/material';
+import { List, ListItem, ListItemIcon, ListItemText, styled, Typography } from '@mui/material';
 import { Section } from './Section';
+import BoltIcon from '@mui/icons-material/Bolt';
 import { ApplicationModal } from './ApplicationModal';
 import { Button } from '../../components/Button';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { RequiredSkills } from '../../components/RequiredSkills';
+import { dateTextConverter } from '../../lib/dateTextConverter';
 
 function JobOfferDetails() {
     const params = useParams<{ missionId: string }>();
@@ -32,7 +35,24 @@ function JobOfferDetails() {
                             </Button>
                         </TitleContainer>
                         <Section title="Informations importantes">
-                            <RequiredSkills jobOffer={jobOffer} />
+                            <List>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <BoltIcon />
+                                    </ListItemIcon>
+                                    <RequiredSkills jobOffer={jobOffer} />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <CalendarMonthIcon />
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        {dateTextConverter.convertDateToReadableText(
+                                            new Date(jobOffer.deadline),
+                                        )}
+                                    </ListItemText>
+                                </ListItem>
+                            </List>
                         </Section>
                         <Section title="Description de la mission">
                             <Typography>{jobOffer.description}</Typography>
@@ -64,6 +84,7 @@ const TitleContainer = styled('div')(({ theme }) => ({
     alignItems: 'center',
     marginBottom: theme.spacing(2),
 }));
+
 const MissionContainer = styled('div')(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     background: theme.palette.background.paper,

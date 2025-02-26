@@ -187,7 +187,6 @@ const Form = styled('div')(({ theme }) => ({
 }));
 const InputContainer = styled('div')(({ theme }) => ({
     display: 'flex',
-    // alignItems: 'center',
     ':not(:first-child)': {
         paddingTop: theme.spacing(3),
     },

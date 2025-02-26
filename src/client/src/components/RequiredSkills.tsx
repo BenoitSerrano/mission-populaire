@@ -27,7 +27,9 @@ const RequiredSkillsContainer = styled('div')(({ theme }) => ({
     flexWrap: 'wrap',
 }));
 const RequiredSkillItem = styled(ListItem)(({ theme }) => ({
-    paddingLeft: theme.spacing(1),
+    ':not(:first-child)': {
+        paddingLeft: theme.spacing(1),
+    },
     width: 'auto',
     paddingRight: theme.spacing(1),
 }));
