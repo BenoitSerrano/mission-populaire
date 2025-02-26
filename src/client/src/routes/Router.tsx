@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { ROUTE_ELEMENTS } from './routeElements';
 import { ROUTE_KEYS, routeKeyType } from './routeKeys';
@@ -6,8 +6,6 @@ import { ROUTE_PATHS } from './routePaths';
 import { TitleWrapper } from './TitleWrapper';
 import { ROUTE_TITLES } from './routeTitles';
 import { AuthenticatedPage } from '../components/AuthenticatedPage';
-import { localStorage } from '../lib/localStorage';
-import { pathHandler } from '../lib/pathHandler';
 
 function Router() {
     return <Routes>{ROUTE_KEYS.map((routeKey) => renderElement(routeKey))}</Routes>;

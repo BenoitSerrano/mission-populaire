@@ -5,14 +5,14 @@ import { pathHandler } from '../lib/pathHandler';
 function Home(): JSX.Element {
     const userInfo = localStorage.userInfoHandler.get();
     if (!userInfo) {
-        return <Navigate to={pathHandler.getRoutePath('SIGN_IN')} />;
+        return <Navigate replace to={pathHandler.getRoutePath('SIGN_IN')} />;
     }
     const role = localStorage.roleHandler.get();
     switch (role) {
         case 'CHEF_GA':
-            return <Navigate to={pathHandler.getRoutePath('MY_ADS')} />;
+            return <Navigate replace to={pathHandler.getRoutePath('MY_ADS')} />;
         case 'MILITANT':
-            return <Navigate to={pathHandler.getRoutePath('MISSIONS')} />;
+            return <Navigate replace to={pathHandler.getRoutePath('MISSIONS')} />;
     }
 }
 
