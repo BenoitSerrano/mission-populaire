@@ -9,6 +9,7 @@ import {
     TableHead,
     TableRow,
 } from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
 import { jobOfferApiType } from '../../lib/api/missionsApi';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton } from '../../components/IconButton';
@@ -38,7 +39,14 @@ function JobOffersTable(props: { jobOffers: jobOfferApiType[] }) {
                                     {jobOffer.requiredSkills.map((requiredSkill) => {
                                         return (
                                             <RequiredSkillItem key={requiredSkill.label}>
-                                                <Chip label={requiredSkill.value} />
+                                                <Chip
+                                                    icon={
+                                                        requiredSkill.isCompetent ? (
+                                                            <StarIcon color="success" />
+                                                        ) : undefined
+                                                    }
+                                                    label={requiredSkill.value}
+                                                />
                                             </RequiredSkillItem>
                                         );
                                     })}
