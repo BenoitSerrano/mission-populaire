@@ -1,11 +1,11 @@
 import { applicationStatusType } from '../../types';
-import { adApiType } from './missionsApi';
+import { jobOfferApiType } from './missionsApi';
 import { userApiType } from './usersApi';
 import { performApiCall } from './utils';
 
 const applicationsApi = {
     createApplication,
-    getAdApplication,
+    getJobOfferApplication,
 };
 
 type applicationApiType = {
@@ -15,12 +15,13 @@ type applicationApiType = {
     appliedAt: string;
 };
 
-async function getAdApplication(params: { applicationId: string }) {
+async function getJobOfferApplication(params: { applicationId: string }) {
     const URI = `ad-applications/${params.applicationId}`;
-    return performApiCall<{ application: applicationApiType; user: userApiType; ad: adApiType }>(
-        URI,
-        'GET',
-    );
+    return performApiCall<{
+        application: applicationApiType;
+        user: userApiType;
+        jobOffer: jobOfferApiType;
+    }>(URI, 'GET');
 }
 
 async function createApplication(params: { missionId: string; content: string }) {

@@ -9,18 +9,23 @@ import { dateTextConverter } from '../../lib/dateTextConverter';
 function Application() {
     const params = useParams<{ applicationId: string }>();
     const applicationId = params.applicationId as string;
-    const getAdApplication = () => applicationsApi.getAdApplication({ applicationId });
+    const getJobOfferApplication = () => applicationsApi.getJobOfferApplication({ applicationId });
     return (
-        <Query apiCall={getAdApplication} queryKey={['ad-applications', applicationId]}>
-            {({ application, ad, user }) => (
+        <Query
+            apiCall={getJobOfferApplication}
+            queryKey={['job-offer-applications', applicationId]}
+        >
+            {({ application, jobOffer, user }) => (
                 <Container>
                     <Page>
                         <PageContent>
                             <TitleContainer>
-                                <Title variant="h2">{ad.title}</Title>
+                                <Title variant="h2">{jobOffer.title}</Title>
                             </TitleContainer>
                             <HeaderContainer>
-                                <Typography variant="h3">{user.displayName}</Typography>
+                                <UserDetailContainer>
+                                    <Typography variant="h3">{user.displayName}</Typography>
+                                </UserDetailContainer>
                                 <Typography variant="h6">
                                     {variabilize(locale.application.appliedAt, {
                                         appliedAt: dateTextConverter.convertDateToReadableText(
@@ -57,6 +62,7 @@ const TitleContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     marginBottom: theme.spacing(2),
 }));
+const UserDetailContainer = styled('div')(({ theme }) => ({}));
 const HeaderContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-between',

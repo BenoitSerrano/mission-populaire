@@ -21,6 +21,7 @@ function buildMissionService() {
         createAd,
         deleteAd,
         convertMissionToAd,
+        convertMissionToJobOffer,
     };
 
     return missionService;

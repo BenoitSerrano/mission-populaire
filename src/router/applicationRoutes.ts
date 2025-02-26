@@ -8,7 +8,7 @@ const applicationRoutes: Array<routeType<any, any, any>> = [
         method: 'GET',
         path: '/ad-applications/:applicationId',
         kind: 'authenticated',
-        controller: applicationController.getAdApplication,
+        controller: applicationController.getJobOfferApplication,
     },
     {
         method: 'POST',

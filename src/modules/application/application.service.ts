@@ -13,7 +13,7 @@ function buildApplicationService() {
     const applicationService = {
         createApplication,
         retrieveApplication,
-        getAdApplicationById,
+        getJobOfferApplicationById,
         getMappedApplicationCountByMission,
         retrieveApplications,
     };
@@ -27,23 +27,15 @@ function buildApplicationService() {
         });
     }
 
-    async function getApplicationCountForMissionId(missionId: Mission['id']) {
-        const applicationCount = await applicationRepository.count({
-            where: { mission: { id: missionId } },
-        });
-        return applicationCount;
-    }
-
-    async function getAdApplicationById(applicationId: Application['id']) {
+    async function getJobOfferApplicationById(applicationId: Application['id']) {
         const missionService = buildMissionService();
         const applicationWithUserAndMission = await applicationRepository.findOneOrFail({
             where: { id: applicationId },
             relations: { user: true, mission: true },
         });
         const { user, mission, ...application } = applicationWithUserAndMission;
-        const applicationCount = await getApplicationCountForMissionId(mission.id);
-        const ad = missionService.convertMissionToAd(mission, applicationCount);
-        return { application, user, ad };
+        const jobOffer = missionService.convertMissionToJobOffer(mission, user);
+        return { application, user, jobOffer };
     }
 
     function retrieveApplication(
