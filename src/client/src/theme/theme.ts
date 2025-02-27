@@ -3,22 +3,24 @@ import { createTheme } from '@mui/material';
 const theme = createTheme({
     palette: {
         primary: {
-            light: '#A288A6',
-            dark: '#654F69',
-            main: '#89678C',
+            main: '#f5e30f',
+            dark: '#ebd90e',
         },
-        mode: 'dark',
         secondary: {
-            main: '#001C55',
+            main: '#571AFF',
         },
 
         warning: { main: '#e87a00', light: '#f5b44d' },
         common: { black: '#12002c' },
-        background: { default: '#21004c', paper: '#432a63' },
-        divider: '#C8B9CA',
+        background: { default: '#ffffff', paper: '#ffffff' },
+        divider: '#e6e6e6',
     },
     spacing: (value: number) => value * 8,
     typography: {
+        button: {
+            fontWeight: 'bold',
+            textTransform: 'none',
+        },
         fontFamily: ['poppins', 'Trebuchet MS'].join(','),
         h1: {
             fontSize: '2rem',

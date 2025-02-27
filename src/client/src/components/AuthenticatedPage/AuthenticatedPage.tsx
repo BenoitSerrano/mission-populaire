@@ -14,9 +14,10 @@ function AuthenticatedPage(props: { children: ReactNode; routeKey: routeKeyType 
 
 const Container = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.background.default,
-    color: theme.palette.common.white,
     height: `calc(100vh - ${HEADER_HEIGHT}px)`,
     flex: 1,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
     display: 'flex',
 }));
 

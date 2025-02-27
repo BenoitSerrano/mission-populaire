@@ -10,9 +10,8 @@ function RequiredSkills(props: { jobOffer: jobOfferApiType }) {
                 return (
                     <RequiredSkillItem key={requiredSkill.label}>
                         <Chip
-                            icon={
-                                requiredSkill.isCompetent ? <StarIcon color="success" /> : undefined
-                            }
+                            color={requiredSkill.isCompetent ? 'primary' : undefined}
+                            icon={requiredSkill.isCompetent ? <StarIcon /> : undefined}
                             label={requiredSkill.value}
                         />
                     </RequiredSkillItem>

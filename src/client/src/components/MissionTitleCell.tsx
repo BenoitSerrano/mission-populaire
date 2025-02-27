@@ -18,9 +18,7 @@ function MissionTitleCell(props: { mission: { title: string; publishedAt: string
     );
 
     function computePublishedOn(publishedAt: string) {
-        const { date } = dateTextConverter.convertTimestampToDateText(
-            new Date(publishedAt).getTime(),
-        );
+        const date = dateTextConverter.convertDateToReadableText(new Date(publishedAt));
         return date;
     }
 }

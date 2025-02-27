@@ -35,6 +35,7 @@ function Button(props: {
     }
     return (
         <MuiButton
+            size={'large'}
             color={props.color}
             title={props.title}
             startIcon={props.startIcon}

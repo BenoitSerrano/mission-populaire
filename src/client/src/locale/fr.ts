@@ -33,7 +33,7 @@ const fr = {
     ads: {
         createAd: 'Créer une annonce',
         adsTable: {
-            publishedOn: 'Publié le {{publishedOn}}',
+            publishedOn: 'Publié {{publishedOn}}',
             missionStatusTitle: {
                 open: 'En recherche de candidat.e',
                 filled: 'Pourvue',
